@@ -1,0 +1,64 @@
+$arrowSize: 20px;
+$popoverBackground: #fff;
+
+.minimal {}
+
+.opened {}
+
+*:not(.minimal) {
+	& > .popover {
+		opacity: 0;
+		transition-delay: 0s;
+		transition-duration: 0.2s;
+		transition-timing-function: cubic-bezier(0.4, 1, 0.75, 0.9);
+		transition-property: opacity;
+	}
+
+	& > .opened {
+		opacity: 1;
+	}
+}
+
+.popoverTarget {
+	display: inline-block;
+}
+
+.popover {
+	display: inline-block;
+	border-radius: 3px;
+	box-shadow:
+		0 0 0 1px rgba(16,22,26,.2),
+		0 2px 4px rgba(16,22,26,.4),
+		0 8px 24px rgba(16,22,26,.4);
+	background-color: $popoverBackground;
+
+	&[data-popper-placement^="top"] > .popoverArrow {
+		bottom: -$arrowSize / 2;
+	}
+
+	&[data-popper-placement^="bottom"] > .popoverArrow {
+		top: -$arrowSize / 2;
+	}
+
+	&[data-popper-placement^="left"] > .popoverArrow {
+		right: -$arrowSize / 2;
+	}
+
+	&[data-popper-placement^="right"] > .popoverArrow {
+		left: -$arrowSize / 2;
+	}
+}
+
+.popoverArrow, .popoverArrow::before {
+	position: absolute;
+	height: $arrowSize;
+	width: $arrowSize;
+	z-index: -1;
+}
+
+.popoverArrow::before {
+	content: "";
+	box-shadow: 1px 1px 6px rgba(16,22,26,.4);
+	background-color: $popoverBackground;
+	transform: rotate(45deg);
+}
