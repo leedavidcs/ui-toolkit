@@ -14,12 +14,15 @@
     "scss": "tsm src"
   },
   "dependencies": {
+    "@popperjs/core": "^2.4.4",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
     "clsx": "^1.1.1",
+    "keycode": "^2.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "typescript": "^3.7.5"
+    "react-popper-2": "npm:react-popper@^2.2.3",
+    "typescript": "^3.9.7"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
