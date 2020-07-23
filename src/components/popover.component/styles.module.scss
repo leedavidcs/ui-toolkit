@@ -1,10 +1,6 @@
 $arrowSize: 20px;
 $popoverBackground: #fff;
 
-.minimal {}
-
-.opened {}
-
 *:not(.minimal) {
 	& > .popover {
 		opacity: 0;

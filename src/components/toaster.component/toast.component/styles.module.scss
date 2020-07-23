@@ -1,0 +1,19 @@
+.root {
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	margin: 20px 0 0;
+	max-width: 500px;
+	min-width: 300px;
+	border-radius: 3px;
+	box-shadow:
+		0 0 0 1px rgba(16,22,26,.2),
+		0 2px 4px rgba(16,22,26,.4),
+		0 8px 24px rgba(16,22,26,.4);
+	z-index: 1000;
+}
+
+.message {
+	flex: 1 1 auto;
+	padding: 11px;
+}
