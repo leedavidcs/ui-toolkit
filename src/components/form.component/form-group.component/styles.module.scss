@@ -1,1 +1,50 @@
-.root {}
+.root {
+	display: flex;
+	flex-direction: column;
+}
+
+.disabled {
+	& .label, .labelInfo, .helperText {
+		color: var(--text-disabled) !important;
+	}
+}
+
+.label {
+	margin: 0 0 5px;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.labelInfo {
+	color: var(--text-muted);
+}
+
+.helperText {
+	margin-top: 5px;
+	font-size: 12px;
+	color: var(--text-muted);
+}
+
+.primary {
+	.helperText {
+		color: var(--primary);
+	}
+}
+
+.success {
+	.helperText {
+		color: var(--success);
+	}
+}
+
+.warning {
+	.helperText {
+		color: var(--warning);
+	}
+}
+
+.danger {
+	.helperText {
+		color: var(--danger);
+	}
+}

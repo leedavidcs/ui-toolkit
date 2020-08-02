@@ -4,8 +4,6 @@ const webpackCraOverrides = require("./webpack-cra-overrides");
 
 module.exports = {
 	addons: [
-		"@storybook/addon-docs",
-		"@storybook/addon-knobs",
 		{
 			name: "@storybook/preset-create-react-app",
 			options: {
@@ -13,7 +11,10 @@ module.exports = {
 					tsconfigPath: path.resolve(__dirname, "../tsconfig.json")
 				}
 			}
-		}
+		},
+		"@storybook/addon-actions",
+		"@storybook/addon-docs",
+		"@storybook/addon-knobs"
 	],
 	webpackFinal: (config) => {
 		const tmpConfig = flow.apply(null, webpackCraOverrides)(config);

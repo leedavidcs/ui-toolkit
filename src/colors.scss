@@ -1,0 +1,40 @@
+$bgDisabled: rgba(206, 217, 224, 0.5);
+$focusShadowPrimary:
+	0 0 0 1px #137cbd,
+	0 0 0 3px rgba(19,124,189,.3),
+	inset 0 1px 1px rgba(16,22,26,.2);
+$focusShadowSuccess:
+	0 0 0 1px #0f9960,
+	0 0 0 3px rgba(15,153,96,.3),
+	inset 0 1px 1px rgba(16,22,26,.2);
+$focusShadowWarning:
+	0 0 0 1px #d9822b,
+	0 0 0 3px rgba(217,130,43,.3),
+	inset 0 1px 1px rgba(16,22,26,.2);
+$focusShadowDanger:
+	0 0 0 1px #db3737,
+	0 0 0 3px rgba(219,55,55,.3),
+	inset 0 1px 1px rgba(16,22,26,.2);
+
+$textDisabled: rgba(92, 112, 128, 0.6);
+$textMuted: #5c7080;
+
+$primary: #106BA3;
+$success: #0D8050;
+$warning: #BF7326;
+$danger: #C23030;
+
+:export {
+	bgDisabled: $bgDisabled;
+	focusShadowPrimary: $focusShadowPrimary;
+	focusShadowSuccess: $focusShadowSuccess;
+	focusShadowWarning: $focusShadowWarning;
+	focusShadowDanger: $focusShadowDanger;
+	textDisabled: $textDisabled;
+	textMuted: $textMuted;
+
+	primary: $primary;
+	success: $success;
+	warning: $warning;
+	danger: $danger;
+}
