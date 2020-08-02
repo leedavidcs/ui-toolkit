@@ -1,0 +1,22 @@
+import { Meta, Preview, Props, Story } from "@storybook/addon-docs/blocks";
+import { CreditCardInput } from ".";
+
+<Meta title="general/form/credit-card-input" component={CreditCardInput} />
+
+# CreditCardInput
+
+## Description
+
+## Dependencies
+* @stripe/react-stripe-js
+* @stripe/stripe-js
+
+## Props
+<Props of={CreditCardInput} />
+
+## StandardStory
+<Preview>
+	<Story name="standard">
+		<CreditCardInput label="Credit Card" labelInfo="(required)" />
+	</Story>
+</Preview>
