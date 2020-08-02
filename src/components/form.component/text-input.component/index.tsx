@@ -80,6 +80,7 @@ const BaseTextInput = forwardRef<HTMLInputElement, IProps>((props, ref) => {
 			helperText={error}
 			intent={intent}
 			label={label}
+			labelFor={name}
 			labelInfo={labelInfo}
 		>
 			<div className={clsx(classes.inputContainer, "uitk-input-container")} style={style}>
