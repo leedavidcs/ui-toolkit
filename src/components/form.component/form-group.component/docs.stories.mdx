@@ -1,0 +1,29 @@
+import { Meta, Preview, Props, Story } from "@storybook/addon-docs/blocks";
+import { boolean } from "@storybook/addon-knobs";
+import { FormGroup } from ".";
+
+<Meta title="general/form/form-group" component={FormGroup} />
+
+# FormGroup
+
+## Description
+
+## Props
+<Props of={FormGroup} />
+
+## StandardStory
+<Preview>
+	<Story name="standard">
+		<FormGroup
+			disabled={boolean("disabled", false)}
+			label="Label"
+			labelInfo="(required)"
+			helperText="Helper text with details..."
+		>
+			<input type="text" />
+		</FormGroup>
+	</Story>
+</Preview>
+
+### Source
+(see code in story)

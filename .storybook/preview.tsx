@@ -1,4 +1,5 @@
 import { addParameters, configure } from "@storybook/react";
+import "../src/app.scss";
 
 const alphabeticSort = (a, b) => {
 	const isSameKind: boolean = a[1].kind === b[1].kind;

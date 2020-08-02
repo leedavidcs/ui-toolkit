@@ -1,0 +1,67 @@
+.inputContainer {
+	display: block;
+	position: relative;
+}
+
+.leftContainer, .rightContainer {
+	position: absolute;
+	top: 0;
+	z-index: 1;
+}
+
+.leftContainer {
+	left: 0;
+}
+
+.rightContainer {
+	right: 0;
+}
+
+.textInput {
+	position: relative;
+	padding: 0 10px;
+	height: 30px;
+	width: 100%;
+	border: none;
+	border-radius: 3px;
+	outline: none;
+	box-shadow:
+		0 0 0 0 rgba(19,124,189,0),
+		0 0 0 0 rgba(19,124,189,0),
+		inset 0 0 0 1px rgba(16,22,26,.15),
+		inset 0 1px 1px rgba(16,22,26,.2);
+	background: #fff;
+	line-height: 30px;
+	font-size: 14px;
+	font-weight: 400;
+
+	&:not(:first-child) {
+		padding-left: 30px;
+	}
+
+	&:not(:last-child) {
+		padding-right: 30px;
+	}
+
+	&:focus {
+		box-shadow: var(--focus-shadow-primary);
+	}
+}
+
+.success {
+	.textInput:focus {
+		box-shadow: var(--focus-shadow-success);
+	}
+}
+
+.warning {
+	.textInput:focus {
+		box-shadow: var(--focus-shadow-warning);
+	}
+}
+
+.danger {
+	.textInput:focus {
+		box-shadow: var(--focus-shadow-danger);
+	}
+}
