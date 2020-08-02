@@ -73,8 +73,8 @@ const BaseTextInput = forwardRef<HTMLInputElement, IProps>((props, ref) => {
 					[classes.warning]: intent === "warning",
 					[classes.danger]: intent === "danger"
 				},
-				"uitk-text-input",
-				className
+				className,
+				"uitk-text-input"
 			)}
 			disabled={disabled}
 			helperText={error}
