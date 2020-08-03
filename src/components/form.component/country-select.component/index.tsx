@@ -93,6 +93,7 @@ export const CountrySelect: FC<IProps> = (props) => {
 				render={({ onChange, value }) => (
 					<BaseCountrySelect
 						{...restProps}
+						name={name}
 						onChange={(country, event) => {
 							_onChange?.(country, event);
 							onChange(country || defaultValue);
