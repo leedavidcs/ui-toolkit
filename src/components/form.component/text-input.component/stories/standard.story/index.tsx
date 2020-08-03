@@ -9,6 +9,7 @@ import * as yup from "yup";
 
 const ICON_SIZE = 30;
 const FORM_WIDTH = 200;
+const BTN_MARGIN = 20;
 const MAX_FIELD_LENGTH = 5;
 
 interface IFormData {
@@ -36,7 +37,11 @@ export const StandardStory: FC = () => {
 				labelInfo={text("labelInfo", "(required)")}
 				leftElement={<Logo height={ICON_SIZE} width={ICON_SIZE} />}
 				placeholder={text("placeholder", "Placeholder...")}
+				submitOnEnter={boolean("submitOnEnter", false)}
 			/>
+			<button type="submit" style={{ marginTop: BTN_MARGIN }}>
+				Submit
+			</button>
 		</form>
 	);
 };
