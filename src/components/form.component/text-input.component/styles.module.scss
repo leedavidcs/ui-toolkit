@@ -25,11 +25,7 @@
 	border: none;
 	border-radius: 3px;
 	outline: none;
-	box-shadow:
-		0 0 0 0 rgba(19,124,189,0),
-		0 0 0 0 rgba(19,124,189,0),
-		inset 0 0 0 1px rgba(16,22,26,.15),
-		inset 0 1px 1px rgba(16,22,26,.2);
+	box-shadow: var(--input-shadow);
 	background: #fff;
 	line-height: 30px;
 	font-size: 14px;

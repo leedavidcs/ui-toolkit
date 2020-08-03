@@ -135,6 +135,7 @@ export const TextInput: FC<IProps & RefAttributes<HTMLInputElement>> = (props) =
 				render={({ onChange, value }) => (
 					<BaseTextInput
 						{...restProps}
+						name={name}
 						onChange={(event) => {
 							_onChange?.(event);
 							onChange(event.currentTarget.value || defaultValue);
