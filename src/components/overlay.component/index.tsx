@@ -32,13 +32,17 @@ export const Overlay: FC<IProps> = (props) => {
 		[isOpen, transitionDuration, transitions]
 	);
 
+	const childrenWithTransitions = useMemo(() => {
+		return isOpen ? Children.map(children ?? [], renderChildWithTransition) : [];
+	}, [children, isOpen, renderChildWithTransition]);
+
 	const transitionContainer = useMemo(
 		() => (
 			<TransitionGroup appear={true} className={className} component="div">
-				{Children.map(children ?? [], renderChildWithTransition)}
+				{childrenWithTransitions}
 			</TransitionGroup>
 		),
-		[children, className, renderChildWithTransition]
+		[childrenWithTransitions, className]
 	);
 
 	return usePortal ? createPortal(transitionContainer, document.body) : transitionContainer;
