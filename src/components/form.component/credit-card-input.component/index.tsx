@@ -1,6 +1,7 @@
 import colors from "@/colors.scss";
 import { FormGroup } from "@/components/form.component/form-group.component";
 import { useFocus } from "@/hooks";
+import { useCallback } from "@storybook/addons";
 import { CardElement, useElements } from "@stripe/react-stripe-js";
 import {
 	StripeCardElement,
@@ -8,7 +9,7 @@ import {
 	StripeCardElementOptions
 } from "@stripe/stripe-js";
 import clsx from "clsx";
-import React, { forwardRef, ReactElement, useImperativeHandle, useMemo } from "react";
+import React, { forwardRef, ReactElement, useImperativeHandle, useMemo, useState } from "react";
 import classes from "./styles.module.scss";
 
 interface IProps {
@@ -25,14 +26,12 @@ export const CreditCardInput = forwardRef<Maybe<StripeCardElement>, IProps>((pro
 	const {
 		cardElementClassName,
 		className,
-		error,
+		error: _error,
 		intent: _intent,
 		label,
 		labelInfo,
-		onChange
+		onChange: _onChange
 	} = props;
-
-	const intent: Intent = _intent ?? (error ? "danger" : "none");
 
 	const elements = useElements();
 
@@ -43,6 +42,20 @@ export const CreditCardInput = forwardRef<Maybe<StripeCardElement>, IProps>((pro
 	});
 
 	const { isFocused, handlers } = useFocus();
+
+	const [stripeError, setStripeError] = useState<string>();
+
+	const error: Maybe<string | ReactElement> = stripeError || _error;
+	const intent: Intent = _intent ?? (error ? "danger" : "none");
+
+	const onChange = useCallback(
+		(event: StripeCardElementChangeEvent): void => {
+			_onChange?.(event);
+
+			setStripeError(event.error?.message);
+		},
+		[_onChange]
+	);
 
 	const options: StripeCardElementOptions = useMemo(
 		() => ({
