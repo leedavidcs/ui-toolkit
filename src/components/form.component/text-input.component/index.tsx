@@ -1,12 +1,15 @@
 import { FormGroup } from "@/components/form.component/form-group.component";
+import { useOnKeyDown } from "@/hooks";
 import clsx from "clsx";
 import React, {
 	CSSProperties,
 	FC,
 	FormEventHandler,
 	forwardRef,
+	KeyboardEvent,
 	ReactElement,
 	RefAttributes,
+	useCallback,
 	useEffect,
 	useRef,
 	useState
@@ -30,8 +33,31 @@ interface IProps {
 	placeholder?: string;
 	rightElement?: Maybe<ReactElement>;
 	style?: CSSProperties;
+	submitOnEnter?: boolean;
 	value?: string;
 }
+
+const useOnInputKeyDown = (props: IProps) => {
+	const { submitOnEnter } = props;
+
+	const onEnter = useOnKeyDown({ key: "enter" }, (event) => {
+		if (submitOnEnter) {
+			return;
+		}
+
+		event.preventDefault();
+	});
+
+	const onEsc = useOnKeyDown({ key: "esc" }, (event) => event.currentTarget.blur());
+
+	return useCallback(
+		(event: KeyboardEvent<HTMLInputElement>) => {
+			onEnter(event);
+			onEsc(event);
+		},
+		[onEnter, onEsc]
+	);
+};
 
 const BaseTextInput = forwardRef<HTMLInputElement, IProps>((props, ref) => {
 	const {
@@ -57,6 +83,8 @@ const BaseTextInput = forwardRef<HTMLInputElement, IProps>((props, ref) => {
 
 	const leftElementRef = useRef<HTMLSpanElement>(null);
 	const rightElementRef = useRef<HTMLSpanElement>(null);
+
+	const onKeyDown = useOnInputKeyDown(props);
 
 	useEffect(() => {
 		setInputStyle({
@@ -99,6 +127,7 @@ const BaseTextInput = forwardRef<HTMLInputElement, IProps>((props, ref) => {
 					disabled={disabled}
 					name={name}
 					onChange={onChange}
+					onKeyDown={onKeyDown}
 					placeholder={placeholder}
 					style={inputStyle}
 					type="text"
