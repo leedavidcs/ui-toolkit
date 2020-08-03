@@ -15,6 +15,7 @@ import { Control, Controller } from "react-hook-form";
 import classes from "./styles.module.scss";
 
 interface IProps {
+	autoComplete?: string;
 	className?: string;
 	control?: Control<any>;
 	defaultValue?: string;
@@ -34,6 +35,7 @@ interface IProps {
 
 const BaseTextInput = forwardRef<HTMLInputElement, IProps>((props, ref) => {
 	const {
+		autoComplete,
 		className,
 		disabled = false,
 		error,
@@ -71,12 +73,14 @@ const BaseTextInput = forwardRef<HTMLInputElement, IProps>((props, ref) => {
 					[classes.warning]: intent === "warning",
 					[classes.danger]: intent === "danger"
 				},
-				"uitk-text-input",
-				className
+				className,
+				"uitk-text-input"
 			)}
+			disabled={disabled}
 			helperText={error}
 			intent={intent}
 			label={label}
+			labelFor={name}
 			labelInfo={labelInfo}
 		>
 			<div className={clsx(classes.inputContainer, "uitk-input-container")} style={style}>
@@ -91,6 +95,7 @@ const BaseTextInput = forwardRef<HTMLInputElement, IProps>((props, ref) => {
 				<input
 					ref={ref}
 					className={clsx(classes.textInput, "uitk-input")}
+					autoComplete={autoComplete}
 					disabled={disabled}
 					name={name}
 					onChange={onChange}
@@ -130,6 +135,7 @@ export const TextInput: FC<IProps & RefAttributes<HTMLInputElement>> = (props) =
 				render={({ onChange, value }) => (
 					<BaseTextInput
 						{...restProps}
+						name={name}
 						onChange={(event) => {
 							_onChange?.(event);
 							onChange(event.currentTarget.value || defaultValue);

@@ -1,4 +1,14 @@
 $bgDisabled: rgba(206, 217, 224, 0.5);
+
+$inputShadow:
+	0 0 0 0 rgba(19,124,189,0),
+	0 0 0 0 rgba(19,124,189,0),
+	inset 0 0 0 1px rgba(16,22,26,.15),
+	inset 0 1px 1px rgba(16,22,26,.2);
+
+$textDisabled: rgba(92, 112, 128, 0.6);
+$textMuted: #5c7080;
+
 $focusShadowPrimary:
 	0 0 0 1px #137cbd,
 	0 0 0 3px rgba(19,124,189,.3),
@@ -16,9 +26,6 @@ $focusShadowDanger:
 	0 0 0 3px rgba(219,55,55,.3),
 	inset 0 1px 1px rgba(16,22,26,.2);
 
-$textDisabled: rgba(92, 112, 128, 0.6);
-$textMuted: #5c7080;
-
 $primary: #106BA3;
 $success: #0D8050;
 $warning: #BF7326;
@@ -26,12 +33,14 @@ $danger: #C23030;
 
 :export {
 	bgDisabled: $bgDisabled;
+	inputShadow: $inputShadow;
+	textDisabled: $textDisabled;
+	textMuted: $textMuted;
+
 	focusShadowPrimary: $focusShadowPrimary;
 	focusShadowSuccess: $focusShadowSuccess;
 	focusShadowWarning: $focusShadowWarning;
 	focusShadowDanger: $focusShadowDanger;
-	textDisabled: $textDisabled;
-	textMuted: $textMuted;
 
 	primary: $primary;
 	success: $success;
