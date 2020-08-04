@@ -1,15 +1,15 @@
 import { Meta, Preview, Props, Story } from "@storybook/addon-docs/blocks";
-import { Button } from ".";
+import { AnchorButton } from ".";
 import { StandardStory } from "./stories";
 
-<Meta title="general/button" component={Button} />
+<Meta title="general/button/anchor-button" component={AnchorButton} />
 
-# Button
+# AnchorButton
 
-# Description
+## Description
 
 ## Props
-<Props of={Button} />
+<Props of={AnchorButton} />
 
 ## StandardStory
 <Preview>
@@ -21,7 +21,7 @@ import { StandardStory } from "./stories";
 ### Source
 ```tsx
 import { ReactComponent as Logo } from "@/assets/logo.svg";
-import { Button } from "@/components/button.component";
+import { AnchorButton } from "@/components/button.component/anchor-button.component";
 import { select, text } from "@storybook/addon-knobs";
 import React, { FC } from "react";
 
@@ -29,7 +29,8 @@ const LOGO_SIZE = 30;
 
 export const StandardStory: FC = () => {
 	return (
-		<Button
+		<AnchorButton
+			href="https://google.com"
 			intent={select(
 				"intent",
 				{
