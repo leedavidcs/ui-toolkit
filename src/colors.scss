@@ -1,49 +1,51 @@
-$bgDisabled: rgba(206, 217, 224, 0.5);
+$bgDisabled: rgba(206, 217, 224, 0.5) !default;
 
 $inputShadow:
 	0 0 0 0 rgba(19,124,189,0),
 	0 0 0 0 rgba(19,124,189,0),
 	inset 0 0 0 1px rgba(16,22,26,.15),
-	inset 0 1px 1px rgba(16,22,26,.2);
+	inset 0 1px 1px rgba(16,22,26,.2) !default;
 
-$textDisabled: rgba(92, 112, 128, 0.6);
-$textMuted: #5c7080;
+$textDisabled: rgba(92, 112, 128, 0.6) !default;
+$textMuted: #5c7080 !default;
 
 $focusShadowPrimary:
 	0 0 0 1px #137cbd,
 	0 0 0 3px rgba(19,124,189,.3),
-	inset 0 1px 1px rgba(16,22,26,.2);
+	inset 0 1px 1px rgba(16,22,26,.2) !default;
 $focusShadowSuccess:
 	0 0 0 1px #0f9960,
 	0 0 0 3px rgba(15,153,96,.3),
-	inset 0 1px 1px rgba(16,22,26,.2);
+	inset 0 1px 1px rgba(16,22,26,.2) !default;
 $focusShadowWarning:
 	0 0 0 1px #d9822b,
 	0 0 0 3px rgba(217,130,43,.3),
-	inset 0 1px 1px rgba(16,22,26,.2);
+	inset 0 1px 1px rgba(16,22,26,.2) !default;
 $focusShadowDanger:
 	0 0 0 1px #db3737,
 	0 0 0 3px rgba(219,55,55,.3),
-	inset 0 1px 1px rgba(16,22,26,.2);
+	inset 0 1px 1px rgba(16,22,26,.2) !default;
 
-$primary: #106BA3;
-$success: #0D8050;
-$warning: #BF7326;
-$danger: #C23030;
+$blue1: #0e5a8a !default;
+$blue2: #106ba3 !default;
+$blue3: #137cbd !default;
+$blue4: #2b95d6 !default;
+$blue5: #48aff0 !default;
 
-:export {
-	bgDisabled: $bgDisabled;
-	inputShadow: $inputShadow;
-	textDisabled: $textDisabled;
-	textMuted: $textMuted;
+$green1: #0a6640 !default;
+$green2: #0d8050 !default;
+$green3: #0f9960 !default;
+$green4: #15b371 !default;
+$green5: #3dcc91 !default;
 
-	focusShadowPrimary: $focusShadowPrimary;
-	focusShadowSuccess: $focusShadowSuccess;
-	focusShadowWarning: $focusShadowWarning;
-	focusShadowDanger: $focusShadowDanger;
+$orange1: #a66321 !default;
+$orange2: #bf7326 !default;
+$orange3: #d9822b !default;
+$orange4: #f29d49 !default;
+$orange5: #ffb366 !default;
 
-	primary: $primary;
-	success: $success;
-	warning: $warning;
-	danger: $danger;
-}
+$red1: #a82a2a !default;
+$red2: #c23030 !default;
+$red3: #db3737 !default;
+$red4: #f55656 !default;
+$red5: #ff7373 !default;
