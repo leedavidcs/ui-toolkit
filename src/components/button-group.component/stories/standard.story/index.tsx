@@ -1,6 +1,6 @@
 import { ButtonGroup } from "@/components/button-group.component";
 import { Button } from "@/components/button.component";
-import { Popover } from "@/components/popver.component";
+import { Popover } from "@/components/popover.component";
 import React, { FC } from "react";
 
 const POPOVER_CONTENT = "I am some popover content!";
