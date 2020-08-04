@@ -1,31 +1,23 @@
-$bgDisabled: rgba(206, 217, 224, 0.5) !default;
-$bgControl: rgba(167,182,194,.5) !default;
+$black: #000 !default;
+$white: #fff !default;
 
-$inputShadow:
-	0 0 0 0 rgba(19,124,189,0),
-	0 0 0 0 rgba(19,124,189,0),
-	inset 0 0 0 1px rgba(16,22,26,.15),
-	inset 0 1px 1px rgba(16,22,26,.2) !default;
+$darkGray1: #182026 !default;
+$darkGray2: #202b33 !default;
+$darkGray3: #293742 !default;
+$darkGray4: #30404d !default;
+$darkGray5: #394b59 !default;
 
-$textDisabled: rgba(92, 112, 128, 0.6) !default;
-$textMuted: #5c7080 !default;
+$gray1: #5c7080 !default;
+$gray2: #738694 !default;
+$gray3: #8a9ba8 !default;
+$gray4: #a7b6c2 !default;
+$gray5: #bfccd6 !default;
 
-$focusShadowPrimary:
-	0 0 0 1px #137cbd,
-	0 0 0 3px rgba(19,124,189,.3),
-	inset 0 1px 1px rgba(16,22,26,.2) !default;
-$focusShadowSuccess:
-	0 0 0 1px #0f9960,
-	0 0 0 3px rgba(15,153,96,.3),
-	inset 0 1px 1px rgba(16,22,26,.2) !default;
-$focusShadowWarning:
-	0 0 0 1px #d9822b,
-	0 0 0 3px rgba(217,130,43,.3),
-	inset 0 1px 1px rgba(16,22,26,.2) !default;
-$focusShadowDanger:
-	0 0 0 1px #db3737,
-	0 0 0 3px rgba(219,55,55,.3),
-	inset 0 1px 1px rgba(16,22,26,.2) !default;
+$lightGray1: #ced9e0 !default;
+$lightGray2: #d8e1e8 !default;
+$lightGray3: #e1e8ed !default;
+$lightGray4: #ebf1f5 !default;
+$lightGray5: #f5f8fa !default;
 
 $blue1: #0e5a8a !default;
 $blue2: #106ba3 !default;
@@ -50,3 +42,21 @@ $red2: #c23030 !default;
 $red3: #db3737 !default;
 $red4: #f55656 !default;
 $red5: #ff7373 !default;
+
+$inputShadow:
+	0 0 0 0 rgba($blue3,0),
+	0 0 0 0 rgba($blue3,0),
+	inset 0 0 0 1px rgba($black, .15),
+	inset 0 1px 1px rgba($black, .2) !default;
+
+@function focusShadow($color) {
+	@return
+		0 0 0 1px $color,
+		0 0 0 3px rgba($color, .3),
+		inset 0 1px 1px rgba($black, .2);
+}
+
+$focusShadowPrimary: focusShadow($blue3) !default;
+$focusShadowSuccess: focusShadow($green3) !default;
+$focusShadowWarning: focusShadow($orange3) !default;
+$focusShadowDanger: focusShadow($red3) !default;

@@ -7,7 +7,7 @@
 
 .disabled {
 	& .label, .labelInfo, .helperText {
-		color: var(--text-disabled) !important;
+		color: rgba($lightGray1,  0.5) !important;
 	}
 }
 
@@ -18,13 +18,13 @@
 }
 
 .labelInfo {
-	color: var(--text-muted);
+	color: $gray1;
 }
 
 .helperText {
 	margin-top: 5px;
 	font-size: 12px;
-	color: var(--text-muted);
+	color: $gray1;
 }
 
 .primary {

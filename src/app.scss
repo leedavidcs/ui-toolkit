@@ -1,16 +1,6 @@
 @import "./colors.scss";
 
-:root {
-	--bg-disabled: #{$bgDisabled};
-	--input-shadow: #{$inputShadow};
-	--text-disabled: #{$textDisabled};
-	--text-muted: #{$textMuted};
-
-	--focus-shadow-primary: #{$focusShadowPrimary};
-	--focus-shadow-success: #{$focusShadowSuccess};
-	--focus-shadow-warning: #{$focusShadowWarning};
-	--focus-shadow-danger: #{$focusShadowDanger};
-}
+:root {}
 
 * {
 	font-family: Roboto;

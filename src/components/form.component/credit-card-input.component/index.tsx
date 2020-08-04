@@ -1,4 +1,4 @@
-import colors from "@/colors.scss";
+import colors from "@/colors.variables.scss";
 import { FormGroup } from "@/components/form.component/form-group.component";
 import { useFocus } from "@/hooks";
 import { useCallback } from "@storybook/addons";
@@ -62,7 +62,7 @@ export const CreditCardInput = forwardRef<Maybe<StripeCardElement>, IProps>((pro
 			iconStyle: "default",
 			style: {
 				base: {
-					iconColor: colors.textMuted,
+					iconColor: colors.gray1,
 					color: "#000",
 					fontFamily: "Roboto"
 				}

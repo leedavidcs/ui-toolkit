@@ -1,3 +1,5 @@
+@import "@/colors";
+
 .inputContainer {
 	display: block;
 	position: relative;
@@ -26,7 +28,7 @@
 	border: none;
 	border-radius: 3px;
 	outline: none;
-	box-shadow: var(--input-shadow);
+	box-shadow: $inputShadow;
 	background: #fff;
 	line-height: 30px;
 	font-size: 14px;
@@ -41,24 +43,24 @@
 	}
 
 	&:focus {
-		box-shadow: var(--focus-shadow-primary);
+		box-shadow: $focusShadowPrimary;
 	}
 }
 
 .success {
 	.textInput:focus {
-		box-shadow: var(--focus-shadow-success);
+		box-shadow: $focusShadowSuccess;
 	}
 }
 
 .warning {
 	.textInput:focus {
-		box-shadow: var(--focus-shadow-warning);
+		box-shadow: $focusShadowWarning;
 	}
 }
 
 .danger {
 	.textInput:focus {
-		box-shadow: var(--focus-shadow-danger);
+		box-shadow: $focusShadowDanger;
 	}
 }

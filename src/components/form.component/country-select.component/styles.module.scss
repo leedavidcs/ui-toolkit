@@ -1,3 +1,5 @@
+@import "@/colors";
+
 .countryDropdownContainer {
 	position: relative;
 
@@ -8,7 +10,7 @@
 		width: 0;
 		border-left: 6px solid transparent;
 		border-right: 6px solid transparent;
-		border-top: 6px solid var(--text-muted);
+		border-top: 6px solid $gray1;
 		top: 15px;
 		right: 15px;
 		transform: translate(50%, -50%);
@@ -25,33 +27,33 @@
 	border: none;
 	border-radius: 3px;
 	outline: none;
-	box-shadow: var(--input-shadow);
+	box-shadow: $inputShadow;
 	background-color: #fff;
 	color: #000;
 
 	&:focus {
-		box-shadow: var(--focus-shadow-primary);
+		box-shadow: $focusShadowPrimary;
 	}
 
 	& > option:first-child {
-		color: var(--text-muted);
+		color: $gray1;
 	}
 }
 
 .success {
 	.countryDropdown:focus {
-		box-shadow: var(--focus-shadow-success);
+		box-shadow: $focusShadowSuccess;
 	}
 }
 
 .warning {
 	.countryDropdown:focus {
-		box-shadow: var(--focus-shadow-warning);
+		box-shadow: $focusShadowWarning;
 	}
 }
 
 .danger {
 	.countryDropdown:focus {
-		box-shadow: var(--focus-shadow-danger);
+		box-shadow: $focusShadowDanger;
 	}
 }
