@@ -1,0 +1,44 @@
+import { Meta, Preview, Props, Story } from "@storybook/addon-docs/blocks";
+import { ButtonGroup } from ".";
+import { StandardStory } from "./stories";
+
+<Meta title="general/button-group" component={ButtonGroup} />
+
+# ButtonGroup
+
+## Description
+
+## Props
+<Props of={ButtonGroup} />
+
+## StandardStory
+<Preview>
+	<Story name="standard">
+		<StandardStory />
+	</Story>
+</Preview>
+
+### Source
+```tsx
+import { ButtonGroup } from "@/components/button-group.component";
+import { Button } from "@/components/button.component";
+import { Popover } from "@/components/popver.component";
+import React, { FC } from "react";
+
+const POPOVER_CONTENT = "I am some popover content!";
+
+export const StandardStory: FC = () => {
+	return (
+		<ButtonGroup>
+			<Button text="First Button" />
+			<Button text="Second Button" />
+			<Popover content={POPOVER_CONTENT}>
+				<Button text="Popover Button" />
+			</Popover>
+			<Popover content={POPOVER_CONTENT}>
+				<Button text="Popover Button" />
+			</Popover>
+		</ButtonGroup>
+	);
+};
+```
