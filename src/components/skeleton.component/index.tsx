@@ -41,7 +41,7 @@ export const Skeleton = memo<IProps>((props) => {
 		));
 	}, [animation, circle, count, height, width]);
 
-	return <div className={clsx(className, "uitk-skeleton")}>{elements}</div>;
+	return <span className={clsx(className, "uitk-skeleton")}>{elements}</span>;
 });
 
 Skeleton.displayName = "Skeleton";
