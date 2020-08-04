@@ -17,12 +17,18 @@ import transitions from "./transitions.module.scss";
 
 const POPPER_OFFSET = 17;
 
+const transitionDuration = {
+	enter: 300,
+	exit: 100
+};
+
 interface IProps {
 	canEscapeKeyClose?: boolean;
 	canOutsideClickClose?: boolean;
 	children?: ReactNode;
 	className?: string;
 	classNamePopper?: string;
+	classNameContent?: string;
 	content?: ReactText | ReactElement;
 	disabled?: boolean;
 	isOpen?: boolean;
@@ -39,6 +45,7 @@ export const Popover: FC<IProps> = ({
 	children,
 	className,
 	classNamePopper,
+	classNameContent,
 	content,
 	disabled = false,
 	isOpen: _isOpen = false,
@@ -67,10 +74,10 @@ export const Popover: FC<IProps> = ({
 	const { styles, attributes } = usePopper(referenceElement, popperElement, {
 		modifiers: [
 			...modifiers,
+			...(minimal ? [] : [{ name: "arrow", options: { element: arrowElement } }]),
 			// Due to transition on scale, disable gpuAcceleration to not position with translate
 			{ name: "computeStyles", options: { adaptive: false, gpuAcceleration: false } },
-			{ name: "offset", options: { offset: [0, POPPER_OFFSET] } },
-			...(minimal ? [] : [{ name: "arrow", options: { element: arrowElement } }])
+			{ name: "offset", options: { offset: [0, POPPER_OFFSET] } }
 		],
 		placement: position
 	});
@@ -95,6 +102,7 @@ export const Popover: FC<IProps> = ({
 			<Overlay
 				className="uitk-overlay"
 				isOpen={!disabled && isOpen}
+				transitionDuration={transitionDuration}
 				transitions={minimal ? {} : transitions}
 				usePortal={usePortal}
 			>
@@ -111,7 +119,15 @@ export const Popover: FC<IProps> = ({
 							style={styles.arrow}
 						/>
 					)}
-					{content}
+					<div
+						className={clsx(
+							classes.popoverContent,
+							classNameContent,
+							"uitk-popper-content"
+						)}
+					>
+						{content}
+					</div>
 				</div>
 			</Overlay>
 		</>
