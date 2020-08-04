@@ -134,6 +134,7 @@ export const Toaster = forwardRef<IToaster, IToasterProps>((props, ref) => {
 				},
 				className
 			)}
+			hasBackdrop={false}
 			isOpen={toasts.length > 0}
 			transitions={transitions}
 			usePortal={usePortal}
