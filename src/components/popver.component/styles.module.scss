@@ -1,6 +1,10 @@
 $arrowSize: 20px;
 $popoverBackground: #fff;
 
+.root {
+	display: inline-flex;
+}
+
 .popover {
 	display: inline-block;
 	border-radius: 3px;
