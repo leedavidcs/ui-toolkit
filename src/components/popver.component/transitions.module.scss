@@ -11,10 +11,12 @@
 
 .exit {
 	opacity: 1;
+	transform: scale(1);
 }
 
 .exitActive {
 	opacity: 0;
-	transition-duration: 0.3s;
+	transform: scale(0.5);
+	transition-duration: 0.1s;
 	transition-timing-function: cubic-bezier(0.4, 1, 0.75, 0.9);
 }

@@ -7,7 +7,7 @@ $popoverBackground: #fff;
 	box-shadow:
 		0 0 0 1px rgba(16,22,26,.2),
 		0 2px 4px rgba(16,22,26,.4),
-		0 8px 24px rgba(16,22,26,.4);
+		0 4px 16px rgba(16,22,26,.4);
 	background-color: $popoverBackground;
 
 	&[data-popper-placement^="top"] > .popoverArrow {
@@ -27,15 +27,23 @@ $popoverBackground: #fff;
 	}
 }
 
+.popoverContent {
+	position: relative;
+	max-width: 350px;
+	padding: 20px;
+	border-radius: 3px;
+	background-color: #fff;
+}
+
 .popoverArrow, .popoverArrow::before {
 	position: absolute;
 	height: $arrowSize;
 	width: $arrowSize;
-	z-index: -1;
 }
 
 .popoverArrow::before {
 	content: "";
+	border: 1px solid rgba(16,22,26,.2);
 	box-shadow: 1px 1px 6px rgba(16,22,26,.4);
 	background-color: $popoverBackground;
 	transform: rotate(45deg);

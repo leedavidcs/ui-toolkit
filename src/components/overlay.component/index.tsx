@@ -5,10 +5,12 @@ import { CSSTransitionClassNames } from "react-transition-group/CSSTransition";
 
 const DEFAULT_TRANSITION_DURATION = 300;
 
+type TransitionTimeout = number | { appear?: number; enter?: number; exit?: number };
+
 interface IProps {
 	className?: string;
 	isOpen?: boolean;
-	transitionDuration?: number;
+	transitionDuration?: TransitionTimeout;
 	transitions: CSSTransitionClassNames;
 	usePortal?: boolean;
 }
