@@ -49,7 +49,9 @@ export const FormGroup: FC<IProps> = ({
 			)}
 			<div className="uitk-form-group-content">
 				{children}
-				{helperText && <div className={classes.helperText}>{helperText}</div>}
+				{helperText && (
+					<div className={clsx(classes.helperText, "uitk-helper-text")}>{helperText}</div>
+				)}
 			</div>
 		</div>
 	);
