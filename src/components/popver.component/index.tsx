@@ -1,16 +1,8 @@
 import { Overlay } from "@/components/overlay.component";
-import { useOnClickOutside, useOnKeyDown } from "@/hooks";
+import { useOnClickOutside, useOnKeyDown, useUncontrolledProp } from "@/hooks";
 import { Placement } from "@popperjs/core";
 import clsx from "clsx";
-import React, {
-	FC,
-	ReactElement,
-	ReactNode,
-	ReactText,
-	useCallback,
-	useEffect,
-	useState
-} from "react";
+import React, { FC, ReactElement, ReactNode, ReactText, useCallback, useState } from "react";
 import { Modifier, usePopper } from "react-popper-2";
 import classes from "./styles.module.scss";
 import transitions from "./transitions.module.scss";
@@ -48,24 +40,19 @@ export const Popover: FC<IProps> = ({
 	classNameContent,
 	content,
 	disabled = false,
-	isOpen: _isOpen = false,
+	isOpen: _isOpen,
 	minimal = false,
 	modifiers = [],
 	onClose: _onClose,
 	position = "bottom-start",
 	usePortal = true
 }) => {
-	const [isOpen, setIsOpen] = useState<boolean>(Boolean(_isOpen));
-
-	useEffect(() => setIsOpen(_isOpen), [_isOpen]);
+	const [isOpen, setIsOpen] = useUncontrolledProp<boolean>(_isOpen, false);
 
 	const onClose = useCallback(() => {
-		if (typeof isOpen !== "boolean") {
-			setIsOpen(false);
-		}
-
+		setIsOpen(false);
 		_onClose?.();
-	}, [_onClose, isOpen]);
+	}, [_onClose, setIsOpen]);
 
 	const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null);
 	const [popperElement, setPopperElement] = useState<HTMLElement | null>(null);
@@ -94,9 +81,15 @@ export const Popover: FC<IProps> = ({
 		}
 	});
 
+	const onClickReference = useCallback(() => setIsOpen(true), [setIsOpen]);
+
 	return (
 		<>
-			<span ref={setReferenceElement} className={clsx(className, "uitk-popover")}>
+			<span
+				ref={setReferenceElement}
+				className={clsx(classes.root, className, "uitk-popover")}
+				onClick={onClickReference}
+			>
 				{children}
 			</span>
 			<Overlay
@@ -119,15 +112,17 @@ export const Popover: FC<IProps> = ({
 							style={styles.arrow}
 						/>
 					)}
-					<div
-						className={clsx(
-							classes.popoverContent,
-							classNameContent,
-							"uitk-popper-content"
-						)}
-					>
-						{content}
-					</div>
+					{content && (
+						<div
+							className={clsx(
+								classes.popoverContent,
+								classNameContent,
+								"uitk-popper-content"
+							)}
+						>
+							{content}
+						</div>
+					)}
 				</div>
 			</Overlay>
 		</>

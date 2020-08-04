@@ -1,0 +1,27 @@
+.root {
+	& :global(.uitk-button) {
+		&:not(:first-child) {
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+		}
+
+		&:not(:last-child) {
+			border-bottom-right-radius: 0;
+			border-top-right-radius: 0;
+			margin-right: -1px;
+		}
+	}
+
+	& :global(.uitk-popover) {
+		&:not(:first-child) :global(.uitk-button) {
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+		}
+
+		&:not(:last-child) :global(.uitk-button) {
+			border-bottom-right-radius: 0;
+			border-top-right-radius: 0;
+			margin-right: -1px;
+		}
+	}
+}
