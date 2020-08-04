@@ -1,4 +1,4 @@
-import { Popover } from "@/components/popver.component";
+import { Popover } from "@/components/popover.component";
 import { action } from "@storybook/addon-actions";
 import { boolean, select } from "@storybook/addon-knobs";
 import React, { FC, useCallback, useState } from "react";

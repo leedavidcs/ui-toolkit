@@ -14,6 +14,21 @@ const transitionDuration = {
 	exit: 100
 };
 
+export enum PopoverPosition {
+	TOP = "top",
+	TOP_START = "top-start",
+	TOP_END = "top-end",
+	BOTTOM = "bottom",
+	BOTTOM_START = "bottom-start",
+	BOTTOM_END = "bottom-end",
+	LEFT = "left",
+	LEFT_START = "left-start",
+	LEFT_END = "left-end",
+	RIGHT = "right",
+	RIGHT_START = "right-start",
+	RIGHT_END = "right-end"
+}
+
 interface IProps {
 	canEscapeKeyClose?: boolean;
 	canOutsideClickClose?: boolean;
@@ -27,7 +42,7 @@ interface IProps {
 	minimal?: boolean;
 	modifiers?: readonly Modifier<any>[];
 	onClose?: () => void;
-	position?: Placement;
+	position?: PopoverPosition | Placement;
 	usePortal?: boolean;
 }
 
@@ -44,7 +59,7 @@ export const Popover: FC<IProps> = ({
 	minimal = false,
 	modifiers = [],
 	onClose: _onClose,
-	position = "bottom-start",
+	position = PopoverPosition.BOTTOM_START,
 	usePortal = true
 }) => {
 	const [isOpen, setIsOpen] = useUncontrolledProp<boolean>(_isOpen, false);
@@ -94,6 +109,7 @@ export const Popover: FC<IProps> = ({
 			</span>
 			<Overlay
 				className="uitk-overlay"
+				hasBackdrop={false}
 				isOpen={!disabled && isOpen}
 				transitionDuration={transitionDuration}
 				transitions={minimal ? {} : transitions}
