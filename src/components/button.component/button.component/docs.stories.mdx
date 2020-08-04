@@ -1,0 +1,48 @@
+import { Meta, Preview, Props, Story } from "@storybook/addon-docs/blocks";
+import { Button } from ".";
+import { StandardStory } from "./stories";
+
+<Meta title="general/button/button" component={Button} />
+
+# Button
+
+# Description
+
+## Props
+<Props of={Button} />
+
+## StandardStory
+<Preview>
+	<Story name="standard">
+		<StandardStory />
+	</Story>
+</Preview>
+
+### Source
+```tsx
+import { ReactComponent as Logo } from "@/assets/logo.svg";
+import { Button } from "@/components/button.component";
+import { select, text } from "@storybook/addon-knobs";
+import React, { FC } from "react";
+
+const LOGO_SIZE = 30;
+
+export const StandardStory: FC = () => {
+	return (
+		<Button
+			intent={select(
+				"intent",
+				{
+					primary: "primary",
+					success: "success",
+					warning: "warning",
+					danger: "danger"
+				},
+				"primary"
+			)}
+			leftElement={<Logo height={LOGO_SIZE} width={LOGO_SIZE} />}
+			text={text("text", "Click Me!")}
+		/>
+	);
+};
+```

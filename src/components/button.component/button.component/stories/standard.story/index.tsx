@@ -1,5 +1,5 @@
 import { ReactComponent as Logo } from "@/assets/logo.svg";
-import { Button } from "@/components/button.component";
+import { Button } from "@/components/button.component/button.component";
 import { select, text } from "@storybook/addon-knobs";
 import React, { FC } from "react";
 

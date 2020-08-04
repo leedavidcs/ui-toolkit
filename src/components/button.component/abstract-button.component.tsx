@@ -1,28 +1,33 @@
 import clsx from "clsx";
-import React, { ButtonHTMLAttributes, DetailedHTMLProps, FC, ReactElement, ReactNode } from "react";
+import React, { FC, ReactElement, ReactNode } from "react";
 import classes from "./styles.module.scss";
 
-interface IProps
-	extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+interface IProps {
 	children?: ReactNode;
+	className?: string;
 	intent?: Intent;
 	leftElement?: Maybe<ReactElement>;
 	rightElement?: Maybe<ReactElement>;
+	tagName?: string;
 	text?: ReactNode;
+	[key: string]: any;
 }
 
-export const Button: FC<IProps> = ({
+export const AbstractButton: FC<IProps> = ({
 	children,
 	className,
 	intent,
 	leftElement,
 	rightElement,
+	tagName = "button",
 	text,
-	...restButtonProps
+	...restProps
 }) => {
+	const Tag: any = tagName;
+
 	return (
-		<button
-			{...restButtonProps}
+		<Tag
+			{...restProps}
 			className={clsx(
 				classes.root,
 				{
@@ -50,6 +55,6 @@ export const Button: FC<IProps> = ({
 					{rightElement}
 				</span>
 			)}
-		</button>
+		</Tag>
 	);
 };
