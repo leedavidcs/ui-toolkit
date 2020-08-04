@@ -1,0 +1,70 @@
+@import "@/colors";
+
+$switchHeight: 16px;
+$switchWidth: 28px;
+$toggleSize: 12px;
+
+.root {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	font-size: 14px;
+	line-height: $switchHeight;
+	cursor: pointer;
+
+	&:hover {
+		& .switchContainer {
+			background-color: rgba(115,134,148,.5);
+		}
+
+		& .input:checked~.switchContainer {
+			background-color: $blue2;
+		}
+	}
+
+	&~:global(.uitk-helper-text) {
+		margin-top: 0;
+	}
+}
+
+.input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	z-index: -1;
+
+	&:checked~.switchContainer {
+		background-color: $blue3;
+
+		&::before {
+			left: calc(100% - #{$switchHeight});
+		}
+	}
+}
+
+.switchContainer {
+	position: relative;
+	display: inline-block;
+	height: $switchHeight;
+	width: $switchWidth;
+	margin-right: 10px;
+	border-radius: 8px;
+	background-color: $bgControl;
+
+	&::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		display: block;
+		height: $toggleSize;
+		width: $toggleSize;
+		margin: ($switchHeight - $toggleSize) / 2;
+		border-radius: 50%;
+		box-shadow:
+			0 0 0 1px rgba(16,22,26,.2),
+			0 1px 1px rgba(16,22,26,.2);
+		background-color: #fff;
+		transition: left 0.1s cubic-bezier(0.4, 1, 0.75, 0.9);
+	}
+}
