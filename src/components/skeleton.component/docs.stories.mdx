@@ -1,0 +1,30 @@
+import { Meta, Preview, Props, Story } from "@storybook/addon-docs/blocks";
+import { boolean, number } from  "@storybook/addon-knobs";
+import { Skeleton } from ".";
+
+<Meta title="general/skeleton" component={Skeleton} />
+
+# Description
+
+## Props
+<Props of={Skeleton} />
+
+## StandardStory
+<Preview>
+	<Story name="standard">
+		<div style={{
+			height: number("containerHeight", 200),
+			width: number("containerWidth", 300)
+		}}>
+			<Skeleton
+				circle={boolean("circle", false)}
+				count={number("count", 1)}
+				height={number("height", undefined)}
+				width={number("width", undefined)}
+			/>
+		</div>
+	</Story>
+</Preview>
+
+### Source
+(see code in story)
