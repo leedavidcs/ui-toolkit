@@ -1,0 +1,33 @@
+import { Switch } from "@/components/form.component/switch.component";
+import { Meta, Preview, Props, Story } from "@storybook/addon-docs/blocks";
+import { number, select } from "@storybook/addon-knobs";
+import { ControlGroup, ControlGroupDirection } from ".";
+
+<Meta title="general/form/control-group" component={ControlGroup} />
+
+# ControlGroup
+
+## Description
+
+## Props
+<Props of={ControlGroup} />
+
+## StandardStory
+<Preview>
+	<Story name="standard">
+		<ControlGroup
+			direction={select(
+				"direction",
+				{
+					[ControlGroupDirection.COLUMN]: ControlGroupDirection.COLUMN,
+					[ControlGroupDirection.ROW]: ControlGroupDirection.ROW
+				},
+				ControlGroupDirection.COLUMN
+			)}
+			gutterSize={number("gutterSize", 8)}
+		>
+			<Switch label="Activity Enabled" />
+			<Switch label="Color Enabled" />
+		</ControlGroup>
+	</Story>
+</Preview>

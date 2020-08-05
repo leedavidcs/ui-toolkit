@@ -35,7 +35,7 @@ export const StandardStory: FC = () => {
 						SwitchAlign.LEFT
 					)}
 					disabled={boolean("disabled", false)}
-					label={text("label", "Enabled")}
+					label={text("label0", "Activity Enabled")}
 				/>
 			</div>
 			<button type="submit" style={{ marginTop: BUTTON_MARGIN }}>

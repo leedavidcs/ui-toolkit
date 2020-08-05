@@ -7,6 +7,7 @@ $toggleSize: 12px;
 .root {
 	position: relative;
 	display: inline-flex;
+	box-sizing: border-box;
 	align-items: center;
 	font-size: 14px;
 	line-height: $switchHeight;
@@ -46,6 +47,11 @@ $toggleSize: 12px;
 	}
 
 	& .switchContainer {
+		background-color: rgba($lightGray1, 0.5);
+	}
+
+	& .label {
+		color: rgba($gray1, 0.5);
 	}
 }
 

@@ -36,7 +36,10 @@ const BaseSwitch: FC<IProps> = ({
 		<label
 			className={clsx(
 				classes.root,
-				{ [classes.alignRight]: align === SwitchAlign.RIGHT },
+				{
+					[classes.alignRight]: align === SwitchAlign.RIGHT,
+					[classes.disabled]: disabled
+				},
 				className,
 				"uitk-switch"
 			)}
