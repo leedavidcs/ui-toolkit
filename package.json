@@ -66,7 +66,7 @@
     "eslint-config-standard": "^14.1.1",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-mdx": "^1.7.1",
+    "eslint-plugin-mdx": "^1.8.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prefer-arrow": "^1.2.2",
     "eslint-plugin-prettier": "^3.1.4",
