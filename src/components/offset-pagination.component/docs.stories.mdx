@@ -1,0 +1,40 @@
+import { Meta, Preview, Props, Story } from "@storybook/addon-docs/blocks";
+import { OffsetPagination } from ".";
+import { StandardStory } from "./stories";
+
+<Meta title="general/offset-pagination" component={OffsetPagination} />
+
+# OffsetPagination
+
+## Description
+
+## Props
+<Props of={OffsetPagination} />
+
+## StandardStory
+<Preview>
+	<Story name="standard">
+		<StandardStory />
+	</Story>
+</Preview>
+
+### Source
+```tsx
+import {
+	IOffsetPaginationParams,
+	OffsetPagination
+} from "@/components/offset-pagination.component";
+import React, { FC, useCallback, useState } from "react";
+
+export const StandardStory: FC = () => {
+	const [pagination, setPagination] = useState<IOffsetPaginationParams>({
+		count: 100,
+		skip: 60,
+		take: 5
+	});
+
+	const onPage = useCallback((params: IOffsetPaginationParams) => setPagination(params), []);
+
+	return <OffsetPagination {...pagination} onPage={onPage} />;
+};
+```

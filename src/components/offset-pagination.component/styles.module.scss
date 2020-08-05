@@ -1,0 +1,75 @@
+@import "@/styles/colors";
+
+.root {
+	display: flex;
+	align-items: center;
+}
+
+.page {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 30px;
+	width: 30px;
+	margin: 0 2px;
+	border-radius: 4px;
+	background-color: $white;
+	cursor: pointer;
+
+	&:not(.selected):hover {
+		background-color: rgba($lightGray3, 0.6);
+		transition-duration: 0.3s;
+		transition-property: background-color;
+		transition-timing-function: cubic-bezier(0.54, 1.12, 0.38, 1.11);
+	}
+}
+
+.selected {
+	background-color: $lightGray1;
+}
+
+.more {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 30px;
+	width: 30px;
+	font-weight: bold;
+	font-size: 20px;
+	cursor: not-allowed;
+}
+
+.sidePage {
+	position: relative;
+	height: 30px;
+	width: 30px;
+	border-radius: 4px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: rgba($lightGray3, 0.6);
+		transition-duration: 0.3s;
+		transition-property: background-color;
+		transition-timing-function: cubic-bezier(0.54, 1.12, 0.38, 1.11);
+	}
+
+	&::before {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		content: "";
+		height: 0;
+		width: 0;
+		border-top: 6px solid transparent;
+		border-bottom: 6px solid transparent;
+	}
+
+	&:first-child::before {
+		border-right: 6px solid $black;
+	}
+
+	&:last-child::before {
+		border-left: 6px solid $black;
+	}
+}

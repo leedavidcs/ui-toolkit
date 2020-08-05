@@ -3,9 +3,11 @@ import { useOnKeyDown } from "@/hooks";
 import clsx from "clsx";
 import React, {
 	CSSProperties,
+	DetailedHTMLProps,
 	FC,
 	FormEventHandler,
 	forwardRef,
+	InputHTMLAttributes,
 	KeyboardEvent,
 	ReactElement,
 	RefAttributes,
@@ -34,6 +36,7 @@ interface IProps {
 	rightElement?: Maybe<ReactElement>;
 	style?: CSSProperties;
 	submitOnEnter?: boolean;
+	type?: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>["type"];
 	value?: string;
 }
 
@@ -74,6 +77,7 @@ const BaseTextInput = forwardRef<HTMLInputElement, IProps>((props, ref) => {
 		placeholder,
 		rightElement,
 		style,
+		type = "text",
 		value
 	} = props;
 
@@ -131,7 +135,7 @@ const BaseTextInput = forwardRef<HTMLInputElement, IProps>((props, ref) => {
 					onKeyDown={onKeyDown}
 					placeholder={placeholder}
 					style={inputStyle}
-					type="text"
+					type={type}
 					value={value}
 				/>
 				{rightElement && (

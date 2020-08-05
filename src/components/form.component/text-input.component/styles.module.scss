@@ -46,6 +46,10 @@
 	&:focus {
 		box-shadow: focusShadow($blue3);
 	}
+
+	&[type=number] {
+		appearance: none;
+	}
 }
 
 .success {

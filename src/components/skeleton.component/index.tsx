@@ -30,7 +30,7 @@ export const Skeleton = memo<IProps>((props) => {
 	);
 
 	const elements = useMemo(() => {
-		return range(count).map((i) => (
+		return range(0, count).map((i) => (
 			<span
 				key={i}
 				className={clsx(classes.skeleton, { [classes.circle]: circle }, "uitk-element")}
