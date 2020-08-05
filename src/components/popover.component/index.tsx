@@ -2,12 +2,21 @@ import { Overlay } from "@/components/overlay.component";
 import { useOnClickOutside, useOnKeyDown, useUncontrolledProp } from "@/hooks";
 import { Placement } from "@popperjs/core";
 import clsx from "clsx";
-import React, { FC, ReactElement, ReactNode, ReactText, useCallback, useState } from "react";
+import React, {
+	FC,
+	ReactElement,
+	ReactNode,
+	ReactText,
+	useCallback,
+	useMemo,
+	useState
+} from "react";
 import { Modifier, usePopper } from "react-popper-2";
 import classes from "./styles.module.scss";
 import transitions from "./transitions.module.scss";
 
 const POPPER_OFFSET = 17;
+const ARROW_PADDING = 10;
 
 const transitionDuration = {
 	enter: 300,
@@ -57,7 +66,7 @@ export const Popover: FC<IProps> = ({
 	disabled = false,
 	isOpen: _isOpen,
 	minimal = false,
-	modifiers = [],
+	modifiers: _modifiers = [],
 	onClose: _onClose,
 	position = PopoverPosition.BOTTOM_START,
 	usePortal = true
@@ -69,22 +78,30 @@ export const Popover: FC<IProps> = ({
 		_onClose?.();
 	}, [_onClose, setIsOpen]);
 
-	const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null);
-	const [popperElement, setPopperElement] = useState<HTMLElement | null>(null);
-	const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null);
+	const [referenceElem, setReferenceElement] = useState<HTMLElement | null>(null);
+	const [popperElem, setPopperElement] = useState<HTMLElement | null>(null);
+	const [arrowElem, setArrowElement] = useState<HTMLElement | null>(null);
 
-	const { styles, attributes } = usePopper(referenceElement, popperElement, {
-		modifiers: [
-			...modifiers,
-			...(minimal ? [] : [{ name: "arrow", options: { element: arrowElement } }]),
-			// Due to transition on scale, disable gpuAcceleration to not position with translate
-			{ name: "computeStyles", options: { adaptive: false, gpuAcceleration: false } },
+	const modifiers: Modifier<any>[] = useMemo(() => {
+		const minimalModifiers: Modifier<any>[] = [
+			{ name: "arrow", options: { element: arrowElem, padding: ARROW_PADDING } },
 			{ name: "offset", options: { offset: [0, POPPER_OFFSET] } }
-		],
+		];
+
+		return [
+			..._modifiers,
+			...(minimal ? [] : minimalModifiers),
+			// Due to transition on scale, disable gpuAcceleration to not position with translate
+			{ name: "computeStyles", options: { adaptive: false, gpuAcceleration: false } }
+		];
+	}, [_modifiers, arrowElem, minimal]);
+
+	const { styles, attributes } = usePopper(referenceElem, popperElem, {
+		modifiers,
 		placement: position
 	});
 
-	useOnClickOutside({ current: popperElement }, () => {
+	useOnClickOutside({ current: popperElem }, () => {
 		if (canOutsideClickClose) {
 			onClose?.();
 		}
