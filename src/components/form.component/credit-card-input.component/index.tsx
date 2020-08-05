@@ -1,6 +1,6 @@
-import colors from "@/colors.variables.scss";
 import { FormGroup } from "@/components/form.component/form-group.component";
 import { useFocus } from "@/hooks";
+import colors from "@/styles/colors.variables.scss";
 import { useCallback } from "@storybook/addons";
 import { CardElement, useElements } from "@stripe/react-stripe-js";
 import {

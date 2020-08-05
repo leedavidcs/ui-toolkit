@@ -1,4 +1,5 @@
-@import "@/colors";
+@import "@/styles/colors";
+@import "@/styles/functions";
 
 .cardElement {
 	box-sizing: border-box;
@@ -14,5 +15,5 @@
 }
 
 .cardElementFocused {
-	box-shadow: $focusShadowPrimary;
+	box-shadow: focusShadow($blue3);
 }

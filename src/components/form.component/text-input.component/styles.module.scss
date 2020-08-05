@@ -1,4 +1,5 @@
-@import "@/colors";
+@import "@/styles/colors";
+@import "@/styles/functions";
 
 .inputContainer {
 	display: block;
@@ -43,24 +44,24 @@
 	}
 
 	&:focus {
-		box-shadow: $focusShadowPrimary;
+		box-shadow: focusShadow($blue3);
 	}
 }
 
 .success {
 	.textInput:focus {
-		box-shadow: $focusShadowSuccess;
+		box-shadow: focusShadow($green3);
 	}
 }
 
 .warning {
 	.textInput:focus {
-		box-shadow: $focusShadowWarning;
+		box-shadow: focusShadow($orange3);
 	}
 }
 
 .danger {
 	.textInput:focus {
-		box-shadow: $focusShadowDanger;
+		box-shadow: focusShadow($red3);
 	}
 }

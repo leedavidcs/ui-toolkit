@@ -48,15 +48,3 @@ $inputShadow:
 	0 0 0 0 rgba($blue3,0),
 	inset 0 0 0 1px rgba($black, .15),
 	inset 0 1px 1px rgba($black, .2) !default;
-
-@function focusShadow($color) {
-	@return
-		0 0 0 1px $color,
-		0 0 0 3px rgba($color, .3),
-		inset 0 1px 1px rgba($black, .2);
-}
-
-$focusShadowPrimary: focusShadow($blue3) !default;
-$focusShadowSuccess: focusShadow($green3) !default;
-$focusShadowWarning: focusShadow($orange3) !default;
-$focusShadowDanger: focusShadow($red3) !default;

@@ -1,4 +1,5 @@
-@import "@/colors";
+@import "@/styles/colors";
+@import "@/styles/functions";
 
 .regionDropdownContainer {
 	position: relative;
@@ -32,7 +33,7 @@
 	color: #000;
 
 	&:focus {
-		box-shadow: $focusShadowPrimary;
+		box-shadow: focusShadow($blue3);
 	}
 
 	& > option:first-child {
@@ -42,18 +43,18 @@
 
 .success {
 	.regionDropdown:focus {
-		box-shadow: $focusShadowSuccess;
+		box-shadow: focusShadow($green3);
 	}
 }
 
 .warning {
 	.regionDropdown:focus {
-		box-shadow: $focusShadowWarning;
+		box-shadow: focusShadow($orange3);
 	}
 }
 
 .danger {
 	.regionDropdown:focus {
-		box-shadow: $focusShadowDanger;
+		box-shadow: focusShadow($red3);
 	}
 }

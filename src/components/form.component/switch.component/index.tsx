@@ -1,51 +1,59 @@
-import { FormGroup } from "@/components/form.component/form-group.component";
 import clsx from "clsx";
-import React, { ChangeEventHandler, FC, ReactElement, ReactText } from "react";
+import React, { ChangeEventHandler, CSSProperties, FC, ReactElement, ReactText } from "react";
 import { Control, Controller } from "react-hook-form";
 import classes from "./styles.module.scss";
 
+export enum SwitchAlign {
+	LEFT = "LEFT",
+	RIGHT = "RIGHT"
+}
+
 interface IProps {
+	align?: SwitchAlign;
 	className?: string;
 	checked?: boolean;
 	control?: Control<any>;
 	defaultChecked?: boolean;
 	disabled?: boolean;
-	error?: string | ReactElement;
-	intent?: Intent;
 	label?: ReactText | ReactElement;
 	name?: string;
 	onChange?: ChangeEventHandler<HTMLInputElement>;
+	style?: CSSProperties;
 }
 
 const BaseSwitch: FC<IProps> = ({
+	align = SwitchAlign.LEFT,
 	className,
 	checked,
 	defaultChecked,
 	disabled = false,
-	error,
-	intent: _intent,
 	label,
 	name,
-	onChange
+	onChange,
+	style
 }) => {
-	const intent: Intent = _intent ?? (error ? "danger" : "none");
-
 	return (
-		<FormGroup helperText={error} intent={intent}>
-			<label className={clsx(classes.root, className)}>
-				<input
-					className={clsx(classes.input, "uitk-input")}
-					checked={checked}
-					defaultChecked={defaultChecked}
-					disabled={disabled}
-					name={name}
-					onChange={onChange}
-					type="checkbox"
-				/>
-				<span className={classes.switchContainer} />
-				{label}
-			</label>
-		</FormGroup>
+		<label
+			className={clsx(
+				classes.root,
+				{ [classes.alignRight]: align === SwitchAlign.RIGHT },
+				className,
+				"uitk-switch"
+			)}
+			style={style}
+		>
+			<input
+				className={clsx(classes.input, "uitk-input")}
+				checked={checked}
+				defaultChecked={defaultChecked}
+				disabled={disabled}
+				name={name}
+				onChange={onChange}
+				type="checkbox"
+			/>
+			<span className={classes.switchContainer} />
+			<span className={classes.label}>{label}</span>
+		</label>
 	);
 };
 
