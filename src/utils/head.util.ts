@@ -1,1 +1,1 @@
-export const head = <T>(arr: T[]): T | undefined => arr[0];
+export const head = <T>(arr: MaybeReadonlyArray<T>): T | undefined => arr[0];
