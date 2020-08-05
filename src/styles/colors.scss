@@ -1,0 +1,50 @@
+$black: #000 !default;
+$white: #fff !default;
+
+$darkGray1: #182026 !default;
+$darkGray2: #202b33 !default;
+$darkGray3: #293742 !default;
+$darkGray4: #30404d !default;
+$darkGray5: #394b59 !default;
+
+$gray1: #5c7080 !default;
+$gray2: #738694 !default;
+$gray3: #8a9ba8 !default;
+$gray4: #a7b6c2 !default;
+$gray5: #bfccd6 !default;
+
+$lightGray1: #ced9e0 !default;
+$lightGray2: #d8e1e8 !default;
+$lightGray3: #e1e8ed !default;
+$lightGray4: #ebf1f5 !default;
+$lightGray5: #f5f8fa !default;
+
+$blue1: #0e5a8a !default;
+$blue2: #106ba3 !default;
+$blue3: #137cbd !default;
+$blue4: #2b95d6 !default;
+$blue5: #48aff0 !default;
+
+$green1: #0a6640 !default;
+$green2: #0d8050 !default;
+$green3: #0f9960 !default;
+$green4: #15b371 !default;
+$green5: #3dcc91 !default;
+
+$orange1: #a66321 !default;
+$orange2: #bf7326 !default;
+$orange3: #d9822b !default;
+$orange4: #f29d49 !default;
+$orange5: #ffb366 !default;
+
+$red1: #a82a2a !default;
+$red2: #c23030 !default;
+$red3: #db3737 !default;
+$red4: #f55656 !default;
+$red5: #ff7373 !default;
+
+$inputShadow:
+	0 0 0 0 rgba($blue3,0),
+	0 0 0 0 rgba($blue3,0),
+	inset 0 0 0 1px rgba($black, .15),
+	inset 0 1px 1px rgba($black, .2) !default;

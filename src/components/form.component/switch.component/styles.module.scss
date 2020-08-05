@@ -1,4 +1,4 @@
-@import "@/colors";
+@import "@/styles/colors";
 
 $switchHeight: 16px;
 $switchWidth: 28px;
@@ -7,10 +7,24 @@ $toggleSize: 12px;
 .root {
 	position: relative;
 	display: inline-flex;
+	box-sizing: border-box;
 	align-items: center;
 	font-size: 14px;
 	line-height: $switchHeight;
 	cursor: pointer;
+
+	&.alignRight {
+		flex-direction: row-reverse;
+
+		& .switchContainer {
+			margin-right: 0;
+		}
+
+		& .label {
+			flex-grow: 1;
+			margin-right: 10px;
+		}
+	}
 
 	&:hover {
 		& .switchContainer {
@@ -24,6 +38,20 @@ $toggleSize: 12px;
 
 	&~:global(.uitk-helper-text) {
 		margin-top: 0;
+	}
+}
+
+.disabled {
+	& .input:checked~.switchContainer {
+		background-color: rgba($blue3, 0.5);
+	}
+
+	& .switchContainer {
+		background-color: rgba($lightGray1, 0.5);
+	}
+
+	& .label {
+		color: rgba($gray1, 0.5);
 	}
 }
 
@@ -50,7 +78,7 @@ $toggleSize: 12px;
 	width: $switchWidth;
 	margin-right: 10px;
 	border-radius: 8px;
-	background-color: $bgControl;
+	background-color: rgba($gray4, 0.5);
 
 	&::before {
 		content: "";

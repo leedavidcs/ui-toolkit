@@ -1,7 +1,6 @@
-import colors from "@/colors.scss";
 import { FormGroup } from "@/components/form.component/form-group.component";
 import { useFocus } from "@/hooks";
-import { useCallback } from "@storybook/addons";
+import colors from "@/styles/colors.variables.scss";
 import { CardElement, useElements } from "@stripe/react-stripe-js";
 import {
 	StripeCardElement,
@@ -9,7 +8,14 @@ import {
 	StripeCardElementOptions
 } from "@stripe/stripe-js";
 import clsx from "clsx";
-import React, { forwardRef, ReactElement, useImperativeHandle, useMemo, useState } from "react";
+import React, {
+	forwardRef,
+	ReactElement,
+	useCallback,
+	useImperativeHandle,
+	useMemo,
+	useState
+} from "react";
 import classes from "./styles.module.scss";
 
 interface IProps {
@@ -62,7 +68,7 @@ export const CreditCardInput = forwardRef<Maybe<StripeCardElement>, IProps>((pro
 			iconStyle: "default",
 			style: {
 				base: {
-					iconColor: colors.textMuted,
+					iconColor: colors.gray1,
 					color: "#000",
 					fontFamily: "Roboto"
 				}

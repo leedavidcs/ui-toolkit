@@ -1,6 +1,6 @@
 import { addDecorator, addParameters, configure } from "@storybook/react";
 import "../src/app.scss";
-import { withStripe } from "../src/storybook";
+import { withJss, withStripe } from "../src/storybook";
 
 const alphabeticSort = (a, b) => {
 	const isSameKind: boolean = a[1].kind === b[1].kind;
@@ -21,6 +21,7 @@ addParameters({
 	}
 });
 
+addDecorator(withJss);
 addDecorator(withStripe);
 
 configure(require.context("../src", true, /\.?stories(\/index)?\.mdx$/), module);
