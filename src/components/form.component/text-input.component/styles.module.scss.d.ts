@@ -5,3 +5,4 @@ export const textInput: string;
 export const success: string;
 export const warning: string;
 export const danger: string;
+export const disabled: string;

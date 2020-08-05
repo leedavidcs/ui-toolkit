@@ -65,3 +65,10 @@
 		box-shadow: focusShadow($red3);
 	}
 }
+
+.disabled {
+	& .textInput {
+		background-color: rgba($lightGray1, 0.6);
+		color: rgba($gray1, 0.6);
+	}
+}
