@@ -2,15 +2,7 @@ import { Overlay } from "@/components/overlay.component";
 import { useOnClickOutside, useOnKeyDown, useUncontrolledProp } from "@/hooks";
 import { Placement } from "@popperjs/core";
 import clsx from "clsx";
-import React, {
-	FC,
-	ReactElement,
-	ReactNode,
-	ReactText,
-	useCallback,
-	useMemo,
-	useState
-} from "react";
+import React, { FC, ReactNode, useCallback, useMemo, useState } from "react";
 import { Modifier, usePopper } from "react-popper-2";
 import classes from "./styles.module.scss";
 import transitions from "./transitions.module.scss";
@@ -45,7 +37,7 @@ interface IProps {
 	className?: string;
 	classNamePopper?: string;
 	classNameContent?: string;
-	content?: ReactText | ReactElement;
+	content?: ReactNode;
 	disabled?: boolean;
 	isOpen?: boolean;
 	minimal?: boolean;
