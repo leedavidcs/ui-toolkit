@@ -1,0 +1,43 @@
+@import "@/styles/colors";
+
+.root {
+	position: fixed;
+	background-color: $white;
+	box-shadow:
+		0 0 0 1px rgba($black, .1),
+		0 4px 8px rgba($black, .2),
+		0 18px 46px 6px rgba($black, .2);
+}
+
+.top, .bottom {
+	min-height: 300px;
+	max-height: 500px;
+	width: 100vw;
+}
+
+.left, .right {
+	height: 100vh;
+	min-width: 300px;
+	max-width: 500px;
+
+}
+
+.top {
+	top: 0;
+	left: 0;
+}
+
+.bottom {
+	bottom: 0;
+	left: 0;
+}
+
+.left {
+	top: 0;
+	left: 0;
+}
+
+.right {
+	top: 0;
+	right: 0;
+}
