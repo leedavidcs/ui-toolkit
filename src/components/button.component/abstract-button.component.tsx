@@ -5,6 +5,7 @@ import classes from "./styles.module.scss";
 interface IProps {
 	children?: ReactNode;
 	className?: string;
+	disabled?: boolean;
 	intent?: Intent;
 	leftElement?: Maybe<ReactElement>;
 	rightElement?: Maybe<ReactElement>;
@@ -16,6 +17,7 @@ interface IProps {
 export const AbstractButton: FC<IProps> = ({
 	children,
 	className,
+	disabled,
 	intent,
 	leftElement,
 	rightElement,
@@ -27,13 +29,16 @@ export const AbstractButton: FC<IProps> = ({
 
 	return (
 		<Tag
+			disabled={tagName !== "a" ? disabled : undefined}
 			{...restProps}
 			className={clsx(
 				classes.root,
 				{
+					[classes.primary]: intent === "primary",
 					[classes.success]: intent === "success",
 					[classes.warning]: intent === "warning",
-					[classes.danger]: intent === "danger"
+					[classes.danger]: intent === "danger",
+					[classes.disabled]: disabled
 				},
 				className,
 				"uitk-button"
