@@ -1,0 +1,19 @@
+@import "@/styles/colors";
+
+.content {
+	box-sizing: border-box;
+	max-height: 600px;
+	width: 400px;
+	padding: 4px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.root {
+	min-width: 300px;
+	color: $gray2;
+
+	&.selected {
+		color: $black;
+	}
+}

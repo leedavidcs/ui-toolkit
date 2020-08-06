@@ -1,0 +1,41 @@
+@import "@/styles/colors";
+
+.root {
+	display: flex;
+	align-items: center;
+	height: 30px;
+	width: 100%;
+	padding-left: 6px;
+	border-radius: 3px;
+	line-height: 30px;
+	cursor: pointer;
+
+	&.selected {
+		background-color: rgba($blue1, 0.8);
+		color: $white;
+	}
+
+	&:not(.selected):hover {
+		background-color: rgba($lightGray2, 0.6);
+	}
+}
+
+.name {
+	flex-grow: 1;
+	height: 30px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.info {
+	flex-shrink: 0;
+	box-sizing: border-box;
+	width: 50px;
+	padding-right: 8px;
+	margin-left: 20px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: $gray1;
+}
