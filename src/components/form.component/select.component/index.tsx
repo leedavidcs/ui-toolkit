@@ -1,4 +1,5 @@
 import { Button } from "@/components/button.component";
+import { FormGroup } from "@/components/form.component/form-group.component";
 import { Popover } from "@/components/popover.component";
 import { useUncontrolledProp } from "@/hooks";
 import { isNil } from "@/utils";
@@ -6,6 +7,7 @@ import clsx from "clsx";
 import React, {
 	FC,
 	memo,
+	ReactElement,
 	ReactNode,
 	ReactText,
 	SyntheticEvent,
@@ -13,6 +15,7 @@ import React, {
 	useMemo,
 	useState
 } from "react";
+import { Control, Controller } from "react-hook-form";
 import { ItemRenderer as _ItemRenderer, ItemRendererType } from "./item-renderer.component";
 import classes from "./styles.module.scss";
 
@@ -25,7 +28,11 @@ export interface ISelectItemType<T = any> {
 
 interface IProps<T, TOriginal = T> {
 	className?: string;
+	control?: Control<any>;
+	defaultSelected?: Maybe<T>;
 	disabled?: boolean;
+	error?: string | ReactElement;
+	intent?: Intent;
 	itemInfo?: (item: TOriginal) => ReactNode;
 	itemKey?: (item: TOriginal) => ReactText;
 	itemMap?: {
@@ -35,8 +42,11 @@ interface IProps<T, TOriginal = T> {
 	itemName?: (item: TOriginal) => ReactText;
 	itemRenderer?: ItemRendererType<TOriginal>;
 	items: readonly TOriginal[];
+	label?: string;
+	labelInfo?: string;
 	minimal?: boolean;
-	onItemSelect?: (item: T, event?: SyntheticEvent<HTMLElement>) => void;
+	name?: string;
+	onItemSelect?: (item: T, index: number, event?: SyntheticEvent<HTMLElement>) => void;
 	placeholder?: string;
 	selected?: Maybe<T>;
 	usePortal?: boolean;
@@ -45,10 +55,12 @@ interface IProps<T, TOriginal = T> {
 const ofType = <T extends unknown, TOriginal = T>() => {
 	type InternalItem = ISelectItemType<TOriginal>;
 
-	const component: FC<IProps<T, TOriginal>> = memo((props) => {
+	const BaseComponent: FC<IProps<T, TOriginal>> = memo((props) => {
 		const {
 			className,
 			disabled,
+			error,
+			intent: _intent,
 			itemInfo,
 			itemKey = (value: TOriginal) => (value as any)?.key ?? String(value),
 			itemMap = {
@@ -58,12 +70,16 @@ const ofType = <T extends unknown, TOriginal = T>() => {
 			itemName = (value: TOriginal) => (value as any)?.key ?? String(value),
 			itemRenderer: ItemRenderer = _ItemRenderer,
 			items: _items,
+			label,
+			labelInfo,
 			minimal = true,
 			onItemSelect: _onItemSelect,
 			placeholder = "",
 			selected: _selected,
 			usePortal = false
 		} = props;
+
+		const intent: Intent = _intent ?? (error ? "danger" : "none");
 
 		const [isOpen, setIsOpen] = useState<boolean>(false);
 		const [selected, setSelected] = useUncontrolledProp(_selected, null);
@@ -85,12 +101,12 @@ const ofType = <T extends unknown, TOriginal = T>() => {
 		]);
 
 		const onItemSelect = useCallback(
-			(item: InternalItem) => {
+			(item: InternalItem, index: number, event?: SyntheticEvent<HTMLElement>) => {
 				const newSelected: T = itemMap.from(item.value);
 
 				setIsOpen(false);
 				setSelected(newSelected);
-				_onItemSelect?.(newSelected);
+				_onItemSelect?.(newSelected, index, event);
 			},
 			[_onItemSelect, itemMap, setSelected]
 		);
@@ -106,9 +122,12 @@ const ofType = <T extends unknown, TOriginal = T>() => {
 			[itemKey, itemMap, selected]
 		);
 
-		const onItemClick = useCallback((item: InternalItem) => onItemSelect?.(item), [
-			onItemSelect
-		]);
+		const onItemClick = useCallback(
+			(item: InternalItem, index: number, event?: SyntheticEvent<HTMLElement>) => {
+				onItemSelect?.(item, index, event);
+			},
+			[onItemSelect]
+		);
 
 		const onClickButton = useCallback(() => setIsOpen(!isOpen), [isOpen]);
 
@@ -131,33 +150,82 @@ const ofType = <T extends unknown, TOriginal = T>() => {
 		}, [disabled, isSelected, items, onItemClick]);
 
 		return (
-			<Popover
-				classNameContent={clsx(classes.content, "uitk-select-content")}
-				content={content}
+			<FormGroup
 				disabled={disabled}
-				isOpen={isOpen}
-				minimal={minimal}
-				onClose={onClose}
-				usePortal={usePortal}
+				helperText={error}
+				intent={intent}
+				label={label}
+				labelInfo={labelInfo}
 			>
-				<Button
-					className={clsx(
-						classes.root,
-						{ [classes.selected]: !isNil(selected) },
-						className,
-						"uitk-select-button"
-					)}
+				<Popover
+					classNameContent={clsx(classes.content, "uitk-select-content")}
+					canOutsideClickClose={true}
+					content={content}
 					disabled={disabled}
-					onClick={onClickButton}
-					text={isNil(selected) ? placeholder : itemName(itemMap.to(selected))}
-				/>
-			</Popover>
+					isOpen={isOpen}
+					minimal={minimal}
+					onClose={onClose}
+					usePortal={usePortal}
+				>
+					<Button
+						className={clsx(
+							classes.root,
+							{ [classes.selected]: !isNil(selected) },
+							className,
+							"uitk-select-button"
+						)}
+						disabled={disabled}
+						onClick={onClickButton}
+						text={isNil(selected) ? placeholder : itemName(itemMap.to(selected))}
+					/>
+				</Popover>
+			</FormGroup>
 		);
 	});
 
-	component.displayName = "TypedSelect";
+	BaseComponent.displayName = "BaseTypedSelect";
 
-	return component;
+	const withController: typeof BaseComponent = (props) => {
+		const {
+			control,
+			defaultSelected,
+			name,
+			onItemSelect: _onItemSelect,
+			selected: _selected,
+			...restProps
+		} = props;
+
+		if (control) {
+			if (!name) {
+				throw new Error("Select is used in a form without a name!");
+			}
+
+			return (
+				<Controller
+					control={control}
+					name={name}
+					defaultValue={defaultSelected}
+					render={({ onChange, value }) => (
+						<BaseComponent
+							{...restProps}
+							name={name}
+							onItemSelect={(item, index, event) => {
+								_onItemSelect?.(item, index, event);
+								onChange(item);
+							}}
+							selected={value ?? null}
+						/>
+					)}
+				/>
+			);
+		}
+
+		return <BaseComponent {...props} />;
+	};
+
+	withController.displayName = "TypedSelect";
+
+	return withController;
 };
 
 interface IWithStaticExports {
