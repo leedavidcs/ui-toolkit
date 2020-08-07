@@ -17,7 +17,7 @@ interface IProps {
 	canOutsideClickClose?: boolean;
 	children?: ReactNode;
 	className?: string;
-	isOpen?: boolean;
+	isOpen: boolean;
 	onClose?: (event: SyntheticEvent<HTMLElement>) => void;
 	position?: PageDrawerPosition;
 	style?: CSSProperties;
