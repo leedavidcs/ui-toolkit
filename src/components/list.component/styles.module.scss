@@ -1,0 +1,18 @@
+@import "@/styles/colors";
+
+.root {
+	margin: 0;
+	padding: 0;
+	box-shadow: 0 0 2px $gray4;
+	list-style-type: none;
+	background-color: rgba($lightGray4, 0.6);
+}
+
+.sortable {
+	list-style-type: none;
+
+	&, & * {
+		pointer-events: auto !important;
+		cursor: grabbing !important;
+	}
+}
