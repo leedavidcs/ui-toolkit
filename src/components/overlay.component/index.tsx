@@ -26,7 +26,7 @@ type TransitionTimeout = number | { appear?: number; enter?: number; exit?: numb
 interface IProps {
 	className?: string;
 	hasBackdrop?: boolean;
-	isOpen?: boolean;
+	isOpen: boolean;
 	transitionDuration?: TransitionTimeout;
 	transitions: CSSTransitionClassNames;
 	usePortal?: boolean;

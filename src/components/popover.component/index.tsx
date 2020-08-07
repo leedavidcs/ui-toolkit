@@ -39,7 +39,7 @@ interface IProps {
 	classNameContent?: string;
 	content?: ReactNode;
 	disabled?: boolean;
-	isOpen?: boolean;
+	isOpen: boolean;
 	minimal?: boolean;
 	modifiers?: readonly Modifier<any>[];
 	onClose?: () => void;

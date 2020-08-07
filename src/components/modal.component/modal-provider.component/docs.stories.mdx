@@ -1,0 +1,45 @@
+import { ModalProvider } from "@/components/modal.component/modal-provider.component";
+import { Meta, Preview, Props, Story } from "@storybook/addon-docs/blocks";
+import { StandardStory } from "./stories";
+
+<Meta title="general/modal/use-modal" component={ ModalProvider } />
+
+# UseModal
+
+## Description
+
+## Props
+<Props of={ModalProvider} />
+
+## StandardStory
+<Preview>
+	<Story name="standard">
+		<StandardStory />
+	</Story>
+</Preview>
+
+### Source
+```tsx
+import { useModal } from "@/components/modal.component/modal-provider.component";
+import Faker from "faker";
+import React, { FC, useCallback } from "react";
+
+Faker.seed(1);
+
+const paragraph = Faker.lorem.paragraph();
+
+export const StandardStory: FC = () => {
+	const { setContent, toggle } = useModal();
+
+	const onOpen = useCallback(() => {
+		setContent({ title: "Hello World~!", body: <div>{paragraph}</div> });
+		toggle(true);
+	}, [setContent, toggle]);
+
+	return (
+		<div>
+			<button onClick={onOpen}>Open Modal</button>
+		</div>
+	);
+};
+```

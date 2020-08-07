@@ -23,7 +23,7 @@ interface IProps {
 	className?: string;
 	confirmButtonText?: string;
 	intent?: Intent;
-	isOpen?: boolean;
+	isOpen: boolean;
 	onCancel?: (event: SyntheticEvent<HTMLElement>) => void;
 	onClose?: (confirmed: boolean, event?: SyntheticEvent<HTMLElement>) => void;
 	onConfirm?: (event: SyntheticEvent<HTMLElement>) => void;
