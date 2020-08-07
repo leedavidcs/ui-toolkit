@@ -1,0 +1,16 @@
+import { Meta, Props } from "@storybook/addon-docs/blocks";
+import { ListItem } from ".";
+
+<Meta title="general/list/list-item" component={ListItem} />
+
+# ListItem
+
+## Description
+A drop-in replacement for `li` with additional behaviors and props.
+
+## Props
+```tsx
+interface IProps extends DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> {
+	index?: number;
+}
+```
