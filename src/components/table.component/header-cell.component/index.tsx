@@ -1,7 +1,7 @@
 import { ITableContext, TableContext } from "@/components/table.component/context";
+import { isNil } from "@/utils";
 import clsx from "clsx";
-import React, { FC, memo, ReactText, useCallback, useContext, useMemo, useState } from "react";
-import Draggable, { ControlPosition, DraggableEventHandler } from "react-draggable";
+import React, { FC, memo, ReactText, useCallback, useContext, useEffect, useState } from "react";
 import classes from "./styles.module.scss";
 
 export interface IHeaderCellProps {
@@ -14,87 +14,70 @@ export interface IHeaderCellProps {
 	width?: number;
 }
 
-const useResizeHandle = ({ index = 0, onResize, width = 0 }: IHeaderCellProps) => {
+const useResize = ({ dataKey, index, onResize, width = 0 }: IHeaderCellProps) => {
+	const { resizing, setResizing } = useContext<ITableContext>(TableContext);
+
 	const [startX, setStartX] = useState<number | null>(null);
-	const [position, setPosition] = useState<ControlPosition>({ x: 0, y: 0 });
 
-	const { setResizing } = useContext<ITableContext>(TableContext);
-
-	const onDragStart: DraggableEventHandler = useCallback(
-		(event, { x }) => {
-			event.stopPropagation();
-
-			/**
-			 * !HACK
-			 * @description Set cursor style on body, so that the cursor doesn't flicker when
-			 *     dragging quickly
-			 * @author David Lee
-			 * @date August 07, 2020
-			 */
+	const onMouseDown = useCallback(
+		(event: React.MouseEvent<HTMLDivElement>) => {
 			document.body.style.cursor = "ew-resize";
 
-			setResizing(x);
-			setStartX(x);
+			setStartX(event.pageX);
+			setResizing(index ?? null);
 		},
-		[setResizing]
+		[index, setResizing]
 	);
 
-	const onDrag: DraggableEventHandler = useCallback(
-		(event, { x }) => {
-			event.stopPropagation();
-
-			setResizing(x);
-			setPosition({ x, y: 0 });
-		},
-		[setResizing]
-	);
-
-	const onDragEnd: DraggableEventHandler = useCallback(
-		(event, { x }) => {
-			event.stopPropagation();
-
-			const deltaX: number = x - (startX ?? 0);
-			const newWidth: number = width + deltaX;
-
+	const onMouseUp = useCallback(
+		(event: MouseEvent) => {
 			document.body.style.cursor = "";
 
-			onResize?.(newWidth, 0, index);
+			if (isNil(dataKey) || isNil(index) || isNil(startX)) {
+				return;
+			}
 
-			setResizing(null);
+			const isResizingThis: boolean = typeof resizing === "number" && resizing === index;
+
+			if (!isResizingThis) {
+				return;
+			}
+
+			const deltaX: number = event.pageX - startX;
+			const newWidth: number = width + deltaX;
+
+			onResize?.(newWidth, dataKey, index);
+
 			setStartX(null);
-			setPosition({ x: 0, y: 0 });
+			setResizing(null);
 		},
-		[index, onResize, setResizing, startX, width]
+		[dataKey, index, onResize, resizing, setResizing, startX, width]
 	);
 
-	const actions = useMemo(() => ({ onDrag, onDragEnd, onDragStart }), [
-		onDrag,
-		onDragEnd,
-		onDragStart
-	]);
+	useEffect(() => {
+		document.addEventListener("mouseup", onMouseUp);
 
-	return useMemo(() => ({ actions, position }), [actions, position]);
+		return () => {
+			document.removeEventListener("mouseup", onMouseUp);
+		};
+	}, [onMouseUp]);
+
+	return onMouseDown;
 };
 
 export const HeaderCell: FC<IHeaderCellProps> = memo((props) => {
 	const { children, resizable, width } = props;
 
-	const { position, actions } = useResizeHandle(props);
+	const onMouseDown = useResize(props);
 
 	return (
 		<div className={clsx(classes.root, "uitk-header-cell")} style={{ minWidth: width, width }}>
 			<div className={clsx(classes.content, "uitk-header-cell-content")}>{children}</div>
 			{resizable && (
-				<Draggable
-					axis="x"
-					disabled={!resizable}
-					onDrag={actions.onDrag}
-					onStart={actions.onDragStart}
-					onStop={actions.onDragEnd}
-					position={position}
-				>
-					<div className={clsx(classes.resizeHandle, "uitk-header-cell-resize-handle")} />
-				</Draggable>
+				<div
+					className={clsx(classes.resizeHandle, "uitk-header-cell-resize-handle")}
+					onMouseDown={onMouseDown}
+				/>
 			)}
 		</div>
 	);

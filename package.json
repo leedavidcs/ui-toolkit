@@ -30,7 +30,6 @@
     "react": "^16.13.1",
     "react-country-region-selector": "^2.1.0",
     "react-dom": "^16.13.1",
-    "react-draggable": "^4.4.3",
     "react-hook-form": "^6.3.0",
     "react-jss": "^10.3.0",
     "react-popper-2": "npm:react-popper@^2.2.3",
