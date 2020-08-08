@@ -103,7 +103,7 @@ const useTableColumns = ({ children }: IProps) => {
 const _Table: FC<IProps> = memo((props) => {
 	const { data, onDataChange, sortable = false, virtualized = true } = props;
 
-	const [resizing, setResizing] = useState<boolean>(false);
+	const [resizing, setResizing] = useState<number | null>(null);
 
 	const { headerCells, bodyCells } = useTableColumns(props);
 

@@ -15,9 +15,13 @@
 }
 
 .sortable {
+	background-color: $white;
 	cursor: grab;
 
 	&:hover {
 		background-color: rgba($blue2, 0.2);
+		transition-property: background-color;
+		transition-duration: 0.2s;
+		transition-timing-function: ease-in;
 	}
 }

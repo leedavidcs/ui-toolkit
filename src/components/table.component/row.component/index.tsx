@@ -25,7 +25,7 @@ const SortableRow = memoSortable(({ data, rowIndex, style }: ISortableRowProps) 
 			const { dataKey } = bodyCell.props;
 			const value = rowData[dataKey];
 
-			return cloneElement(bodyCell, { key: dataKey, value });
+			return cloneElement(bodyCell, { key: dataKey, data: rowData, value });
 		});
 	}, [bodyCells, rowData]);
 
