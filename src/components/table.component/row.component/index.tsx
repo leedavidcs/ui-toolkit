@@ -1,7 +1,9 @@
 import { ITableContext, TableContext } from "@/components/table.component/context";
+import clsx from "clsx";
 import React, { cloneElement, CSSProperties, FC, memo, useContext, useMemo } from "react";
 import { SortableElement } from "react-sortable-hoc";
 import { ListChildComponentProps } from "react-window";
+import classes from "./styles.module.scss";
 
 interface ISortableRowProps<T extends unknown = any> {
 	data: readonly T[];
@@ -25,7 +27,11 @@ const SortableRow = memoSortable(({ data, rowIndex, style }: ISortableRowProps) 
 		});
 	}, [bodyCells, rowData]);
 
-	return <div style={style}>{rowCells}</div>;
+	return (
+		<div className={clsx(classes.root, "uitk-table-row")} style={style}>
+			{rowCells}
+		</div>
+	);
 });
 
 SortableRow.displayName = "SortableDataRow";

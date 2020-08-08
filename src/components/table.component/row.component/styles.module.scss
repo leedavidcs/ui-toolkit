@@ -1,0 +1,9 @@
+@import "@/styles/colors";
+
+.root {
+	display: flex;
+	box-shadow: 
+		0 -1px 0 rgba($gray4, 0.8),
+		0 1px 0 rgba($gray4, 0.8);
+	background-color: $white;
+}

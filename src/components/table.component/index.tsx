@@ -12,9 +12,11 @@ import React, {
 import AutoSizer from "react-virtualized-auto-sizer";
 import { FixedSizeList } from "react-window";
 import { Cell, ICellProps } from "./cell.component";
-import { Column } from "./column.component";
+import { Column, IColumnProps } from "./column.component";
 import { TableContext } from "./context";
 import { HeaderCell, IHeaderCellProps } from "./header-cell.component";
+import { InnerElement } from "./inner-element.component";
+import { OuterElement } from "./outer-element.component";
 import { Row } from "./row.component";
 
 interface IProps<T extends unknown = any> {
@@ -35,7 +37,8 @@ const useTableColumns = ({ children }: IProps) => {
 				return;
 			}
 
-			const colChildren: ReactNodeArray = column.props.children;
+			const colProps: IColumnProps = column.props;
+			const colChildren: ReactNodeArray = colProps.children;
 
 			if (colChildren.length !== 2) {
 				throw new Error(`<HeaderCell> and <Cell> are required, column index: ${i}`);
@@ -46,8 +49,20 @@ const useTableColumns = ({ children }: IProps) => {
 				ReactElement<IHeaderCellProps>
 			];
 
-			_headerCells.push(cloneElement(headerChild));
-			_bodyCells.push(cloneElement(cellChild));
+			const cellProps = {
+				width: colProps.width ?? 0
+			};
+
+			_headerCells.push(
+				cloneElement(headerChild, {
+					...cellProps
+				})
+			);
+			_bodyCells.push(
+				cloneElement(cellChild, {
+					...cellProps
+				})
+			);
 		});
 
 		return [_headerCells, _bodyCells] as [readonly ReactElement[], readonly ReactElement[]];
@@ -74,8 +89,11 @@ const _Table: FC<IProps> = memo((props) => {
 				{({ height, width }) => (
 					<FixedSizeList
 						height={height}
+						innerElementType={InnerElement}
 						itemCount={data.length}
+						itemData={data}
 						itemSize={30}
+						outerElementType={OuterElement}
 						width={width}
 					>
 						{Row}

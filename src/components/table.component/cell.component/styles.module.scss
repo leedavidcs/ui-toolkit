@@ -1,5 +1,7 @@
 @import "@/styles/colors";
 
 .root {
-	box-shadow: 0 0 1px rgba($gray4, 0.6);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
