@@ -34,7 +34,7 @@ export const InnerElement = forwardRef<HTMLDivElement, Props>((props, ref) => {
 			className={clsx(classes.root, className, "uitk-table-inner-element")}
 			{...restDivProps}
 		>
-			<Body axis="y" lockAxis="y" onSortEnd={onSortEnd}>
+			<Body axis="y" helperClass={classes.sortable} lockAxis="y" onSortEnd={onSortEnd}>
 				{children}
 			</Body>
 		</div>

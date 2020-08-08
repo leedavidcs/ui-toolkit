@@ -1,3 +1,10 @@
 .root {
 	position: relative;
 }
+
+.sortable {
+	&, & * {
+		pointer-events: auto !important;
+		cursor: grabbing !important;
+	}
+}

@@ -1,5 +1,6 @@
 import { Table } from "@/components/table.component";
 import { range } from "@/utils";
+import { boolean } from "@storybook/addon-knobs";
 import Faker from "faker";
 import React, { FC, useState } from "react";
 
@@ -25,7 +26,7 @@ export const StandardStory: FC = () => {
 
 	return (
 		<div style={{ height: 500, width: 500 }}>
-			<Table data={data} onDataChange={setData}>
+			<Table data={data} onDataChange={setData} sortable={boolean("sortable", false)}>
 				<Table.Column width={100}>
 					<Table.HeaderCell>Name</Table.HeaderCell>
 					<Table.Cell dataKey="name" />

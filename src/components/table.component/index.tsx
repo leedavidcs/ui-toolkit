@@ -19,10 +19,17 @@ import { InnerElement } from "./inner-element.component";
 import { OuterElement } from "./outer-element.component";
 import { Row } from "./row.component";
 
+/**
+ * @note Any updates to IProps should be updated on the story `docs.stories.mdx`, because docgen
+ *     seems not to be able to read them.
+ * @author David Lee
+ * @date August 07, 2020
+ */
 interface IProps<T extends unknown = any> {
 	children?: ReactNode;
 	data: readonly T[];
 	onDataChange?: (newData: readonly T[]) => void;
+	sortable?: boolean;
 }
 
 const useTableColumns = ({ children }: IProps) => {
@@ -72,15 +79,16 @@ const useTableColumns = ({ children }: IProps) => {
 };
 
 const _Table: FC<IProps> = memo((props) => {
-	const { data, onDataChange } = props;
+	const { data, onDataChange, sortable = false } = props;
 
 	const { headerCells, bodyCells } = useTableColumns(props);
 
-	const value = useMemo(() => ({ bodyCells, data, headerCells, onDataChange }), [
+	const value = useMemo(() => ({ bodyCells, data, headerCells, onDataChange, sortable }), [
 		bodyCells,
 		data,
 		headerCells,
-		onDataChange
+		onDataChange,
+		sortable
 	]);
 
 	return (

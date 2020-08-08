@@ -7,3 +7,17 @@
 		0 1px 0 rgba($gray4, 0.8);
 	background-color: $white;
 }
+
+.cellContainer {
+	display: flex;
+	flex-grow: 1;
+	
+}
+
+.sortable {
+	cursor: grab;
+
+	&:hover {
+		background-color: rgba($blue2, 0.2);
+	}
+}

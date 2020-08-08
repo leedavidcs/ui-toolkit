@@ -14,7 +14,7 @@ interface ISortableRowProps<T extends unknown = any> {
 const memoSortable = <P extends unknown>(element: FC<P>) => memo(SortableElement(element));
 
 const SortableRow = memoSortable(({ data, rowIndex, style }: ISortableRowProps) => {
-	const { bodyCells } = useContext<ITableContext>(TableContext);
+	const { bodyCells, sortable } = useContext<ITableContext>(TableContext);
 
 	const rowData = data[rowIndex];
 
@@ -29,7 +29,9 @@ const SortableRow = memoSortable(({ data, rowIndex, style }: ISortableRowProps) 
 
 	return (
 		<div className={clsx(classes.root, "uitk-table-row")} style={style}>
-			{rowCells}
+			<div className={clsx(classes.cellContainer, { [classes.sortable]: sortable })}>
+				{rowCells}
+			</div>
 		</div>
 	);
 });
@@ -41,5 +43,15 @@ interface IProps<T extends unknown = any> extends ListChildComponentProps {
 }
 
 export const Row: FC<IProps> = ({ data, index, style }) => {
-	return <SortableRow data={data} index={index} rowIndex={index} style={style} />;
+	const { sortable } = useContext<ITableContext>(TableContext);
+
+	return (
+		<SortableRow
+			data={data}
+			disabled={!sortable}
+			index={index}
+			rowIndex={index}
+			style={style}
+		/>
+	);
 };
