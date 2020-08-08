@@ -7,7 +7,8 @@ import React, {
 	ReactElement,
 	ReactNode,
 	ReactNodeArray,
-	useMemo
+	useMemo,
+	useState
 } from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { FixedSizeList } from "react-window";
@@ -17,7 +18,7 @@ import { TableContext } from "./context";
 import { HeaderCell, IHeaderCellProps } from "./header-cell.component";
 import { InnerElement } from "./inner-element.component";
 import { OuterElement } from "./outer-element.component";
-import { Row } from "./row.component";
+import { DEFAULT_ROW_HEIGHT, Row } from "./row.component";
 
 /**
  * @note Any updates to IProps should be updated on the story `docs.stories.mdx`, because docgen
@@ -30,6 +31,7 @@ interface IProps<T extends unknown = any> {
 	data: readonly T[];
 	onDataChange?: (newData: readonly T[]) => void;
 	sortable?: boolean;
+	virtualized?: boolean;
 }
 
 const useTableColumns = ({ children }: IProps) => {
@@ -47,22 +49,42 @@ const useTableColumns = ({ children }: IProps) => {
 			const colProps: IColumnProps = column.props;
 			const colChildren: ReactNodeArray = colProps.children;
 
+			/**
+			 * !IMPORTANT
+			 * @description Column default props defined here, so that props can be accessed during
+			 *     table-configuration phase
+			 * @author David Lee
+			 * @date August 07, 2020
+			 */
+			const { onResize, resizable = false, width = 0 } = colProps;
+
 			if (colChildren.length !== 2) {
 				throw new Error(`<HeaderCell> and <Cell> are required, column index: ${i}`);
 			}
 
 			const [headerChild, cellChild] = colChildren as [
-				ReactElement<ICellProps>,
-				ReactElement<IHeaderCellProps>
+				ReactElement<IHeaderCellProps>,
+				ReactElement<ICellProps>
 			];
 
+			if (headerChild.type !== HeaderCell || cellChild.type !== Cell) {
+				throw new Error(
+					`<HeaderCell> and <Cell> are required in that order, column index: ${i}`
+				);
+			}
+
 			const cellProps = {
-				width: colProps.width ?? 0
+				dataKey: cellChild.props.dataKey,
+				key: cellChild.props.dataKey,
+				index: i,
+				width
 			};
 
 			_headerCells.push(
 				cloneElement(headerChild, {
-					...cellProps
+					...cellProps,
+					onResize,
+					resizable
 				})
 			);
 			_bodyCells.push(
@@ -79,17 +101,16 @@ const useTableColumns = ({ children }: IProps) => {
 };
 
 const _Table: FC<IProps> = memo((props) => {
-	const { data, onDataChange, sortable = false } = props;
+	const { data, onDataChange, sortable = false, virtualized = true } = props;
+
+	const [resizing, setResizing] = useState<number | null>(null);
 
 	const { headerCells, bodyCells } = useTableColumns(props);
 
-	const value = useMemo(() => ({ bodyCells, data, headerCells, onDataChange, sortable }), [
-		bodyCells,
-		data,
-		headerCells,
-		onDataChange,
-		sortable
-	]);
+	const value = useMemo(
+		() => ({ bodyCells, data, headerCells, onDataChange, resizing, setResizing, sortable }),
+		[bodyCells, data, headerCells, onDataChange, resizing, sortable]
+	);
 
 	return (
 		<TableContext.Provider value={value}>
@@ -100,8 +121,9 @@ const _Table: FC<IProps> = memo((props) => {
 						innerElementType={InnerElement}
 						itemCount={data.length}
 						itemData={data}
-						itemSize={30}
+						itemSize={DEFAULT_ROW_HEIGHT}
 						outerElementType={OuterElement}
+						overscanCount={virtualized ? 1 : data.length}
 						width={width}
 					>
 						{Row}

@@ -1,6 +1,8 @@
 @import "@/styles/colors";
 
 .root {
+	box-sizing: border-box;
+	padding-left: 10px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;

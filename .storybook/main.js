@@ -3,6 +3,7 @@ const path = require("path");
 const webpackCraOverrides = require("./webpack-cra-overrides");
 
 module.exports = {
+	stories:  ["../src/**/*.stories.mdx"],
 	addons: [
 		{
 			name: "@storybook/preset-create-react-app",

@@ -1,0 +1,51 @@
+@import "@/styles/colors";
+
+.root {
+	box-sizing: border-box;
+	display: flex;
+	height: 100%;
+	color: $gray4;
+	font-size: 14px;
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	flex-grow: 1;
+	padding-left: 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.resizeHandle {
+	width: 3px;
+	flex-shrink: 1;
+}
+
+.content:hover~.resizeHandle,
+.resizeHandle:hover {
+	background-color: $blue5;
+	cursor: ew-resize;
+
+	&::before, &::after {
+		content: "";
+		position: absolute;
+		height: 0;
+		margin: auto;
+		width: 0;
+		top: 0;
+		bottom: 0;
+		border: 3px dashed transparent;
+	}
+
+	&::before {
+		border-right: 3px solid $blue5;
+		right: 4px;
+	}
+
+	&::after {
+		border-left: 3px solid $blue5;
+		left: 4px;
+	}
+}

@@ -1,7 +1,9 @@
-import { FC, ReactNodeArray } from "react";
+import { FC, ReactNodeArray, ReactText } from "react";
 
 export interface IColumnProps {
 	children: ReactNodeArray;
+	onResize?: (newWidth: number, dataKey: ReactText, index: number) => void;
+	resizable?: boolean;
 	width?: number;
 }
 

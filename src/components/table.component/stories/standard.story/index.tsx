@@ -1,13 +1,16 @@
 import { Table } from "@/components/table.component";
 import { range } from "@/utils";
-import { boolean } from "@storybook/addon-knobs";
+import { boolean, number } from "@storybook/addon-knobs";
 import Faker from "faker";
-import React, { FC, useState } from "react";
+import React, { FC, ReactText, useCallback, useState } from "react";
 
 Faker.seed(1);
 
 const DATA_SIZE = 100;
 const MAX_AGE = 100;
+const DEFAULT_COLUMN_WIDTHS = 100;
+const DEFAULT_BOUNDING_HEIGHT = 480;
+const DEFAULT_BOUNDING_WIDTH = 848;
 
 interface ITableData {
 	age: number;
@@ -23,15 +26,37 @@ const _data = range(0, DATA_SIZE).map<ITableData>((_, i) => ({
 
 export const StandardStory: FC = () => {
 	const [data, setData] = useState<readonly ITableData[]>(_data);
+	const [widths, setWidths] = useState<readonly number[]>([
+		DEFAULT_COLUMN_WIDTHS,
+		DEFAULT_COLUMN_WIDTHS
+	]);
+
+	const resizable = boolean("resizable", false);
+
+	const onResize = useCallback(
+		(newWidth: number, dataKey: ReactText, index: number) => {
+			const newWidths = [...widths];
+
+			newWidths[index] = newWidth;
+
+			setWidths(newWidths);
+		},
+		[widths]
+	);
 
 	return (
-		<div style={{ height: 500, width: 500 }}>
+		<div
+			style={{
+				height: number("bounding-height", DEFAULT_BOUNDING_HEIGHT),
+				width: number("bounding-width", DEFAULT_BOUNDING_WIDTH)
+			}}
+		>
 			<Table data={data} onDataChange={setData} sortable={boolean("sortable", false)}>
-				<Table.Column width={100}>
+				<Table.Column onResize={onResize} resizable={resizable} width={widths[0]}>
 					<Table.HeaderCell>Name</Table.HeaderCell>
 					<Table.Cell dataKey="name" />
 				</Table.Column>
-				<Table.Column width={100}>
+				<Table.Column onResize={onResize} resizable={resizable} width={widths[1]}>
 					<Table.HeaderCell>Age</Table.HeaderCell>
 					<Table.Cell dataKey="age" />
 				</Table.Column>

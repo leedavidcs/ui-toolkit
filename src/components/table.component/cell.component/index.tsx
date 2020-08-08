@@ -5,7 +5,7 @@ import classes from "./styles.module.scss";
 export interface ICellProps {
 	children?: (data: any) => ReactElement;
 	dataKey: string;
-	rowIndex?: number;
+	index?: number;
 	value?: any;
 	width?: number;
 }

@@ -5,6 +5,8 @@ import { SortableElement } from "react-sortable-hoc";
 import { ListChildComponentProps } from "react-window";
 import classes from "./styles.module.scss";
 
+export const DEFAULT_ROW_HEIGHT = 40;
+
 interface ISortableRowProps<T extends unknown = any> {
 	data: readonly T[];
 	rowIndex: number;
@@ -29,7 +31,13 @@ const SortableRow = memoSortable(({ data, rowIndex, style }: ISortableRowProps) 
 
 	return (
 		<div className={clsx(classes.root, "uitk-table-row")} style={style}>
-			<div className={clsx(classes.cellContainer, { [classes.sortable]: sortable })}>
+			<div
+				className={clsx(
+					classes.cellContainer,
+					{ [classes.sortable]: sortable },
+					"uitk-table-row-cell-container"
+				)}
+			>
 				{rowCells}
 			</div>
 		</div>
