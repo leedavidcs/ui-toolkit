@@ -2,15 +2,15 @@
 
 .root {
 	display: flex;
+	flex-grow: 1;
+	width: unset !important;
 	box-shadow: 
-		0 -1px 0 rgba($gray4, 0.8),
-		0 1px 0 rgba($gray4, 0.8);
-	background-color: $white;
+		0 -1px 0 rgba($lightGray1, 0.6),
+		0 1px 0 rgba($lightGray1, 0.6);
 }
 
 .cellContainer {
 	display: flex;
-	align-items: center;
 	flex-grow: 1;
 }
 
@@ -19,7 +19,7 @@
 	cursor: grab;
 
 	&:hover {
-		background-color: rgba($blue3, 0.1);
+		background-color: change-color($color: $blue1, $lightness: 85%);
 		transition-property: background-color;
 		transition-duration: 0.2s;
 		transition-timing-function: ease-in;

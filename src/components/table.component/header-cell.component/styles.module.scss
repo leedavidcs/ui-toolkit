@@ -21,7 +21,7 @@
 .resizeHandle {
 	position: relative;
 	width: 3px;
-	flex-shrink: 1;
+	flex-shrink: 0;
 }
 
 .content:hover~.resizeHandle,

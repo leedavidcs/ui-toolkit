@@ -1,6 +1,5 @@
 import { ITableContext, TableContext } from "@/components/table.component/context";
 import { DEFAULT_ROW_HEIGHT } from "@/components/table.component/row.component";
-import composeRefs from "@seznam/compose-react-refs";
 import clsx from "clsx";
 import React, {
 	DetailedHTMLProps,
@@ -58,15 +57,10 @@ export const OuterElement = forwardRef<HTMLDivElement, Props>((props, ref) => {
 
 	const { ref: resizeRef, resizeOffset } = useResize();
 
-	const composedRef = composeRefs<HTMLDivElement>(ref, resizeRef);
-
 	return (
-		<div
-			ref={composedRef}
-			className={clsx(className, "uitk-table-outer-element")}
-			{...restDivProps}
-		>
+		<div ref={ref} className={clsx(className, "uitk-table-outer-element")} {...restDivProps}>
 			<div
+				ref={resizeRef}
 				className={clsx(classes.header, "uitk-table-header")}
 				style={{ height: DEFAULT_ROW_HEIGHT }}
 			>

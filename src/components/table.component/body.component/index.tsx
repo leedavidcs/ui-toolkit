@@ -8,7 +8,7 @@ interface IProps {
 const memoSortable = <P extends unknown>(element: FC<P>) => memo(SortableContainer(element));
 
 export const Body = memoSortable(({ children }: IProps) => {
-	return <div>{children}</div>;
+	return <div className="uitk-table-body">{children}</div>;
 });
 
 Body.displayName = "Body";
