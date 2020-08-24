@@ -1,2 +1,1 @@
-export const header: string;
-export const resizing: string;
+export const root: string;

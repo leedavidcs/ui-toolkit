@@ -7,8 +7,7 @@ import React, {
 	ReactElement,
 	ReactNode,
 	ReactNodeArray,
-	useMemo,
-	useState
+	useMemo
 } from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { FixedSizeList } from "react-window";
@@ -56,7 +55,7 @@ const useTableColumns = ({ children }: IProps) => {
 			 * @author David Lee
 			 * @date August 07, 2020
 			 */
-			const { onResize, resizable = false, width = 0 } = colProps;
+			const { fixed, onResize, resizable = false, width = 0 } = colProps;
 
 			if (colChildren.length !== 2) {
 				throw new Error(`<HeaderCell> and <Cell> are required, column index: ${i}`);
@@ -76,6 +75,7 @@ const useTableColumns = ({ children }: IProps) => {
 			const cellProps = {
 				dataKey: cellChild.props.dataKey,
 				key: cellChild.props.dataKey,
+				fixed,
 				index: i,
 				width
 			};
@@ -103,13 +103,17 @@ const useTableColumns = ({ children }: IProps) => {
 const _Table: FC<IProps> = memo((props) => {
 	const { data, onDataChange, sortable = false, virtualized = true } = props;
 
-	const [resizing, setResizing] = useState<number | null>(null);
-
 	const { headerCells, bodyCells } = useTableColumns(props);
 
 	const value = useMemo(
-		() => ({ bodyCells, data, headerCells, onDataChange, resizing, setResizing, sortable }),
-		[bodyCells, data, headerCells, onDataChange, resizing, sortable]
+		() => ({
+			bodyCells,
+			data,
+			headerCells,
+			onDataChange,
+			sortable
+		}),
+		[bodyCells, data, headerCells, onDataChange, sortable]
 	);
 
 	return (

@@ -24,6 +24,24 @@
 	flex-shrink: 0;
 }
 
+.resizeIndicator {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 1px;
+	background-color: $blue5;
+	z-index: 20;
+
+	&::before {
+		position: absolute;
+		left: -1px;
+		content: "";
+		height: 40px;
+		width: 3px;
+		background-color: $blue5;
+	}
+}
+
 .content:hover~.resizeHandle,
 .resizeHandle:hover {
 	background-color: $blue5;

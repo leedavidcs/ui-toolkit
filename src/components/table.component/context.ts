@@ -7,8 +7,6 @@ export interface ITableContext<T extends unknown = any> {
 	data: readonly T[];
 	headerCells: readonly ReactElement<IHeaderCellProps>[];
 	onDataChange?: (newData: readonly T[]) => void;
-	resizing: number | null;
-	setResizing: (newResizing: number | null) => void;
 	sortable: boolean;
 }
 
@@ -16,8 +14,6 @@ export const TableContext: Context<ITableContext> = createContext<ITableContext>
 	bodyCells: [],
 	data: [],
 	headerCells: [],
-	resizing: null,
-	setResizing: () => undefined,
 	sortable: false
 });
 

@@ -1,5 +1,6 @@
 import { Body } from "@/components/table.component/body.component";
 import { ITableContext, TableContext } from "@/components/table.component/context";
+import { DEFAULT_ROW_HEIGHT } from "@/components/table.component/row.component";
 import { arrayMove } from "@/utils";
 import clsx from "clsx";
 import React, {
@@ -17,7 +18,7 @@ type Props = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 export const InnerElement = forwardRef<HTMLDivElement, Props>((props, ref) => {
 	const { children, className, ...restDivProps } = props;
 
-	const { data, onDataChange } = useContext<ITableContext>(TableContext);
+	const { data, headerCells, onDataChange } = useContext<ITableContext>(TableContext);
 
 	const onSortEnd: SortEndHandler = useCallback(
 		({ oldIndex, newIndex }) => {
@@ -34,7 +35,19 @@ export const InnerElement = forwardRef<HTMLDivElement, Props>((props, ref) => {
 			className={clsx(classes.root, className, "uitk-table-inner-element")}
 			{...restDivProps}
 		>
-			<Body axis="y" helperClass={classes.sortable} lockAxis="y" onSortEnd={onSortEnd}>
+			<div
+				className={clsx(classes.header, "uitk-table-header")}
+				style={{ height: DEFAULT_ROW_HEIGHT }}
+			>
+				{headerCells}
+			</div>
+			<Body
+				className={classes.body}
+				axis="y"
+				helperClass={classes.sortable}
+				lockAxis="y"
+				onSortEnd={onSortEnd}
+			>
 				{children}
 			</Body>
 		</div>

@@ -12,6 +12,7 @@ export interface ICellProps<T extends unknown = any> {
 	children?: (childProps: ICellChildProps<T>) => ReactElement;
 	data?: T;
 	dataKey: ReactText;
+	fixed?: "left" | "right";
 	index?: number;
 	value?: any;
 	width?: number;
