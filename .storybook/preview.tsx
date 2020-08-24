@@ -1,4 +1,4 @@
-import addons from "@storybook/addons";
+import { addons } from "@storybook/addons";
 import { addDecorator, addParameters } from "@storybook/react";
 import "../src/app.scss";
 import { withJss, withStripe } from "../src/storybook";

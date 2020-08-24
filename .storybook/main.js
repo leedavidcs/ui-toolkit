@@ -3,8 +3,15 @@ const path = require("path");
 const webpackCraOverrides = require("./webpack-cra-overrides");
 
 module.exports = {
-	stories:  ["../src/**/*.stories.mdx"],
+	stories: [
+		"../src/**/*.stories.@(tsx|mdx)",
+		"../src/**/stories/index.@(tsx|mdx)",
+		"../src/**/stories/*.stories/index.@(tsx|mdx)"
+	],
 	addons: [
+		"@storybook/addon-essentials",
+		"@storybook/addon-knobs",
+		"@storybook/addon-storysource",
 		{
 			name: "@storybook/preset-create-react-app",
 			options: {
@@ -12,10 +19,7 @@ module.exports = {
 					tsconfigPath: path.resolve(__dirname, "../tsconfig.json")
 				}
 			}
-		},
-		"@storybook/addon-actions",
-		"@storybook/addon-docs",
-		"@storybook/addon-knobs"
+		}
 	],
 	webpackFinal: (config) => {
 		const tmpConfig = flow.apply(null, webpackCraOverrides)(config);
