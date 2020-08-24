@@ -15,6 +15,15 @@ import classes from "./styles.module.scss";
 
 export const MIN_HEADER_WIDTH = 20;
 
+/**
+ * !HACK
+ * @description PageX is getting a bad mouse position. Apply this arbitrary offset to correct
+ *     indicator position
+ * @author David Lee
+ * @date August 24, 2020
+ */
+const INDICATOR_CORRECTION_OFFSET = 15;
+
 export interface IHeaderCellProps {
 	children?: ReactText;
 	dataKey?: ReactText;
@@ -32,29 +41,47 @@ const useResize = (props: IHeaderCellProps, ref: RefObject<HTMLDivElement>) => {
 	const [startX, setStartX] = useState<number | null>(null);
 	const [position, setPosition] = useState<number>(0);
 
-	const onMouseDown = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
-		document.body.style.cursor = "ew-resize";
-		document.body.style.userSelect = "none";
-
-		setStartX(event.pageX);
-		setIsResizing(true);
-	}, []);
-
-	const onMouseMove = useCallback(
-		(event: MouseEvent) => {
+	const setIndicatorPosition = useCallback(
+		(event: MouseEvent | React.MouseEvent<HTMLDivElement>) => {
 			const rootElem = ref.current;
 
-			if (!isResizing || !rootElem) {
+			if (!rootElem) {
 				return;
 			}
 
 			const { left: leftBound } = rootElem.getBoundingClientRect();
 
-			const newXPosition: number = Math.max(event.pageX, leftBound);
+			const newXPosition: number = Math.max(
+				event.pageX - INDICATOR_CORRECTION_OFFSET,
+				leftBound
+			);
 
 			setPosition(newXPosition);
 		},
-		[isResizing, ref]
+		[ref]
+	);
+
+	const onMouseDown = useCallback(
+		(event: React.MouseEvent<HTMLDivElement>) => {
+			document.body.style.cursor = "ew-resize";
+			document.body.style.userSelect = "none";
+
+			setStartX(event.pageX);
+			setIsResizing(true);
+			setIndicatorPosition(event);
+		},
+		[setIndicatorPosition]
+	);
+
+	const onMouseMove = useCallback(
+		(event: MouseEvent) => {
+			if (!isResizing) {
+				return;
+			}
+
+			setIndicatorPosition(event);
+		},
+		[isResizing, setIndicatorPosition]
 	);
 
 	const onMouseUp = useCallback(
