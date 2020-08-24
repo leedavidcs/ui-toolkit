@@ -51,20 +51,21 @@ export const ScrollBar: FC<IProps> = ({
 	onScroll,
 	position: _position
 }) => {
-	const [length, setLength] = useState<number>(1);
+	const [position, setPosition] = useUncontrolledProp(_position, 0);
+
 	const [scrollLength, setScrollLength] = useState<number>(1);
+	const [length, setLength] = useState<number>(1);
 
 	const dynClasses = useDynamicStyles({ length, scrollLength });
 
-	const [position, setPosition] = useUncontrolledProp(_position, 0);
-
 	const isHorizontal: boolean = direction === "x";
 
-	const maxScroll: number = useMemo(() => {
-		const scrollbarLength: number = Math.pow(length, 2) / scrollLength;
+	const scrollbarLength: number = useMemo(() => Math.pow(length, 2) / scrollLength, [
+		length,
+		scrollLength
+	]);
 
-		return length - scrollbarLength;
-	}, [length, scrollLength]);
+	const maxScroll: number = useMemo(() => length - scrollbarLength, [length, scrollbarLength]);
 
 	const getContentPosition = useCallback(
 		(newPosition: number) => (newPosition * scrollLength) / length,
@@ -73,33 +74,38 @@ export const ScrollBar: FC<IProps> = ({
 
 	const handleScroll = useCallback(
 		(delta: number) => {
-			const newPosition: number = Math.max(0, Math.min(maxScroll, position + delta));
-			const newContentPosition: number = getContentPosition(newPosition);
+			setPosition((oldPosition: number) => {
+				const newPosition: number = Math.max(0, Math.min(maxScroll, oldPosition + delta));
+				const newContentPosition: number = getContentPosition(newPosition);
 
-			onScroll?.({
-				position: newPosition,
-				delta,
-				contentPosition: newContentPosition
+				onScroll?.({
+					position: newPosition,
+					delta,
+					contentPosition: newContentPosition
+				});
+
+				return newPosition;
 			});
-
-			setPosition(newPosition);
 		},
-		[getContentPosition, maxScroll, onScroll, position, setPosition]
+		[getContentPosition, maxScroll, onScroll, setPosition]
 	);
 
 	const onWheel = useCallback(
 		({ deltaY, shiftKey }: WheelEvent) => {
-			if (isHorizontal) {
-				const isSideWheel: boolean = canShiftScroll && shiftKey;
+			const scale: number = scrollbarLength / maxScroll;
+			const delta: number = Math.ceil(deltaY * scale);
 
-				handleScroll(isSideWheel ? deltaY : 0);
+			const isSideWheel: boolean = canShiftScroll && shiftKey;
+
+			if (isHorizontal) {
+				handleScroll(isSideWheel ? delta : 0);
 
 				return;
 			}
 
-			handleScroll(deltaY);
+			handleScroll(isSideWheel ? 0 : delta);
 		},
-		[canShiftScroll, isHorizontal, handleScroll]
+		[scrollbarLength, maxScroll, isHorizontal, handleScroll, canShiftScroll]
 	);
 
 	const onDrag: DraggableEventHandler = useCallback(
@@ -128,7 +134,7 @@ export const ScrollBar: FC<IProps> = ({
 
 		setScrollLength(newScrollLength);
 		setLength(newLength);
-	}, [containerRef, direction, isHorizontal]);
+	}, [containerRef, direction, isHorizontal, setScrollLength]);
 
 	useEffect(() => {
 		const containerElem: HTMLElement | null = containerRef.current;
