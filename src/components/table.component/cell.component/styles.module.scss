@@ -1,0 +1,12 @@
+@import "@/styles/colors";
+
+.root {
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	padding-left: 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 14px;
+}

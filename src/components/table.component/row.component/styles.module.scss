@@ -1,0 +1,27 @@
+@import "@/styles/colors";
+
+.root {
+	display: flex;
+	flex-grow: 1;
+	width: unset !important;
+	box-shadow: 
+		0 -1px 0 rgba($lightGray1, 0.6),
+		0 1px 0 rgba($lightGray1, 0.6);
+}
+
+.cellContainer {
+	display: flex;
+	flex-grow: 1;
+}
+
+.sortable {
+	background-color: $white;
+	cursor: grab;
+
+	&:hover {
+		background-color: change-color($color: $blue1, $lightness: 85%);
+		transition-property: background-color;
+		transition-duration: 0.2s;
+		transition-timing-function: ease-in;
+	}
+}

@@ -4,7 +4,7 @@ export const useUncontrolledProp = <T extends unknown>(prop: T | undefined, defa
 	const [controlled, setControlled] = useState<T>(defaultValue);
 
 	const setProp = useCallback(
-		(newValue: T) => {
+		(newValue: T | ((oldValue: T) => T)) => {
 			if (prop !== undefined) {
 				return;
 			}

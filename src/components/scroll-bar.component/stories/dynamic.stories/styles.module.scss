@@ -1,0 +1,60 @@
+@import "@/styles/colors";
+
+$scrollbarSize: 12px;
+
+.root {
+	position: relative;
+	box-sizing: border-box;
+	height: 600px;
+	width: 600px;
+	box-shadow: 0 0 4px rgba($gray2, 0.8);
+	overflow: hidden;
+}
+
+.vRoot {
+	@extend .root;
+
+	padding-right: $scrollbarSize;
+}
+
+.hRoot {
+	@extend .root;
+
+	padding-bottom: $scrollbarSize;
+}
+
+.content {
+	position: absolute;
+}
+
+.vContent {
+	@extend .content;
+
+	height: 1000px;
+	width: 100%;
+}
+
+.hContent {
+	@extend .content;
+
+	height: 100%;
+	width: 1000px;
+}
+
+.scrollbar {
+	position: absolute;
+}
+
+.vScrollbar {
+	@extend .scrollbar;
+
+	top: 0;
+	right: 0;
+}
+
+.hScrollbar {
+	@extend .scrollbar;
+
+	bottom: 0;
+	left: 0;
+}
