@@ -1,0 +1,28 @@
+@import "@/styles/colors";
+
+$scrollbarSize: 12px;
+
+.root {
+	position: absolute;
+	display: flex;
+	background-color: $lightGray3;
+	z-index: 20;
+
+	&.vertical {
+		flex-direction: column;
+		width: $scrollbarSize;
+	}
+
+	&.horizontal {
+		flex-direction: row;
+		height: $scrollbarSize;
+	}
+}
+
+.scrollbar {
+	background-color: $red1;
+}
+
+:export {
+	scrollbarSize: $scrollbarSize;
+}

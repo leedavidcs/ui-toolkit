@@ -1,0 +1,61 @@
+.enterActive {
+	transition-property: transform;
+	transition-duration: 0.3s;
+	transition-timing-function: ease;
+}
+
+.exitActive {
+	transition-property: transform;
+	transition-duration: 0.3s;
+	transition-timing-function: ease;
+}
+
+.exit {
+	transform: translate(0, 0);
+}
+
+.top  {
+	.enter {
+		transform: translate(0, -100%);
+	}
+
+	.exitActive {
+		transform: translate(0, -100%);
+	}
+}
+
+.bottom {
+	.enter {
+		transform: translate(0, 100%);
+	}
+
+	.exitActive {
+		transform: translate(0, 100%);
+	}
+}
+
+.left {
+	.enter {
+		transform: translate(-100%, 0);
+	}
+
+	.exitActive {
+		transform: translate(-100%, 0);
+	}
+}
+
+.right {
+	.enter {
+		transform: translate(100%, 0);
+	}
+
+	.exitActive {
+		transform: translate(100%, 0);
+	}
+}
+
+.top, .bottom, .left, .right {
+	& .enterActive {
+		transform: translate(0, 0);
+	}
+}

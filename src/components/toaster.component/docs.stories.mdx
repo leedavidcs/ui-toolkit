@@ -1,0 +1,42 @@
+import { Meta, Preview, Props, Story } from "@storybook/addon-docs/blocks";
+import { Toaster, ToasterPosition } from ".";
+import { StandardStory } from "./stories";
+
+<Meta title="general/toaster" component={Toaster} />
+
+# Toaster
+
+## Description
+
+## Dependencies
+* react-transition-group
+
+## Props
+<Props of={Toaster} />
+
+## StandardStory
+<Preview>
+	<Story name="standard">
+		<StandardStory />
+	</Story>
+</Preview>
+
+### Source
+```tsx
+import { useToaster } from "@/components/toaster.component";
+import React, { FC, useCallback, useRef } from "react";
+
+export const StandardStory: FC = () => {
+	const { show } = useToaster();
+
+	const count = useRef<number>(0);
+
+	const onClick = useCallback(() => show({ message: `New toast: ${++count.current}` }), [show]);
+
+	return (
+		<button onClick={onClick} type="button">
+			Click me
+		</button>
+	);
+};
+```

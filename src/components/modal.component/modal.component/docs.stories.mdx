@@ -1,0 +1,46 @@
+import { Meta, Preview, Props, Story } from "@storybook/addon-docs/blocks";
+import { Modal } from ".";
+import { StandardStory } from "./stories";
+
+<Meta title="general/modal" component={Modal} />
+
+# Modal
+
+## Description
+
+## Props
+<Props of={Modal} />
+
+## StandardStory
+<Preview>
+	<Story name="standard">
+		<StandardStory />
+	</Story>
+</Preview>
+
+### Source
+```tsx
+import { Modal } from "@/components/modal.component";
+import Faker from "faker";
+import React, { FC, useCallback, useState } from "react";
+
+Faker.seed(1);
+
+const contents = Faker.lorem.paragraph();
+
+export const StandardStory: FC = () => {
+	const [isOpen, setIsOpen] = useState<boolean>(false);
+
+	const onOpen = useCallback(() => setIsOpen(true), []);
+	const onClose = useCallback(() => setIsOpen(false), []);
+
+	return (
+		<div>
+			<button onClick={onOpen}>Open</button>
+			<Modal isOpen={isOpen} onClose={onClose}>
+				{contents}
+			</Modal>
+		</div>
+	);
+};
+```

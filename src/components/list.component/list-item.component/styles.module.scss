@@ -1,0 +1,33 @@
+@import "@/styles/colors";
+
+.root {
+	box-shadow:
+		0 -1px 0 rgba($gray5, 0.6),
+		0 1px 0 rgba($gray5, 0.6);
+	background-color: $white;
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	padding: 10px 8px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.interactable {
+	cursor: pointer;
+
+	&:hover {
+		background-color: rgba($blue2, 0.2);
+	}
+}
+
+.sortable {
+	cursor: grab;
+}

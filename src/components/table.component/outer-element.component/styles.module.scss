@@ -1,0 +1,8 @@
+$scrollbarSize: 12px;
+
+.root {
+	position: relative !important;
+	box-sizing: border-box;
+	padding-right: $scrollbarSize;
+	padding-bottom: $scrollbarSize;
+}

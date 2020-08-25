@@ -1,4 +1,7 @@
-import { addParameters, configure } from "@storybook/react";
+import { addons } from "@storybook/addons";
+import { addDecorator, addParameters } from "@storybook/react";
+import "../src/app.scss";
+import { withJss, withStripe } from "../src/storybook";
 
 const alphabeticSort = (a, b) => {
 	const isSameKind: boolean = a[1].kind === b[1].kind;
@@ -12,11 +15,15 @@ const alphabeticSort = (a, b) => {
 	return compared;
 };
 
+addons.setConfig({
+	showRoots: true
+});
+
 addParameters({
 	options: {
-		showRoots: true,
 		storySort: alphabeticSort
 	}
 });
 
-configure(require.context("../src", true, /\.?stories(\/index)?\.mdx$/), module);
+addDecorator(withJss);
+addDecorator(withStripe);

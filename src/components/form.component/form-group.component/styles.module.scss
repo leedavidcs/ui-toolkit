@@ -1,0 +1,52 @@
+@import "@/styles/colors";
+
+.root {
+	display: flex;
+	flex-direction: column;
+}
+
+.disabled {
+	& .label, .labelInfo, .helperText {
+		color: rgba($gray1, 0.5) !important;
+	}
+}
+
+.label {
+	margin: 0 0 5px;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.labelInfo {
+	color: $gray1;
+}
+
+.helperText {
+	margin-top: 5px;
+	font-size: 12px;
+	color: $gray1;
+}
+
+.primary {
+	.helperText {
+		color: $blue2;
+	}
+}
+
+.success {
+	.helperText {
+		color: $green2;
+	}
+}
+
+.warning {
+	.helperText {
+		color: $orange2;
+	}
+}
+
+.danger {
+	.helperText {
+		color: $red2;
+	}
+}

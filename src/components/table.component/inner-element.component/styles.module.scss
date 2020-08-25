@@ -1,0 +1,28 @@
+@import "@/styles/colors";
+
+.root {
+	position: static;
+}
+
+.sortable {
+	&,
+	& * {
+		pointer-events: auto !important;
+		cursor: grabbing !important;
+	}
+}
+
+.header {
+	position: sticky;
+	top: 0;
+	left: 0;
+	display: inline-flex;
+	box-shadow: 0 0 4px $black;
+	background-color: $white;
+	z-index: 20;
+}
+
+.body {
+	position: absolute;
+	top: 40px;
+}

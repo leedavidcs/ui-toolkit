@@ -19,11 +19,13 @@
     "noEmit": true,
     "jsx": "react",
     "baseUrl": "./",
+    "downlevelIteration": true,
     "paths": {
       "@/*": ["./src/*"]
     }
   },
   "include": [
-    "src"
+    "src",
+    "types"
   ]
 }
