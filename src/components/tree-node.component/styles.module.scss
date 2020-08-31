@@ -1,0 +1,59 @@
+@import "@/styles/colors";
+
+.label {
+	display: flex;
+	align-items: center;
+	height: 30px;
+	user-select: none;
+	cursor: pointer;
+
+	&:hover {
+		background-color: $lightGray2;
+	}
+}
+
+.arrow {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 30px;
+	width: 30px;
+	padding: 9px;
+	transition-property: transform;
+	transition-duration: 0.15s;
+	transition-timing-function: linear;
+
+	&::before {
+		content: none;
+	}
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	padding-left: 24px;
+	margin: 0;
+	list-style-type: none;
+}
+
+.child {
+	display: block;
+}
+
+.isOpen {
+	& > .label > .arrow {
+		transform: rotate(90deg);
+	}
+}
+
+.withChildren {
+	& > .label > .arrow::before {
+		content: "";
+		height: 0;
+		width: 0;
+		border-left: 6px solid $darkGray4;
+		border-top: 6px solid transparent;
+		border-bottom: 6px solid transparent;
+	}
+}
